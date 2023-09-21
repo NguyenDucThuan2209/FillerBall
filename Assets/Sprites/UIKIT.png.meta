@@ -620,6 +620,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: BigSquare
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 4592
+        width: 408
+        height: 408
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e41ba1309629c2429b5a39c67b245b8
+      internalID: 569922361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallSquare
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 4596
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7f7c136fae10664a86dbf5523d86426
+      internalID: -421239594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -645,6 +687,7 @@ TextureImporter:
       UIKIT_103: 22329697
       UIKIT_112: -2127838025
       Level_4: -61820008
+      SmallSquare: -421239594
       UIKIT_119: 1594322516
       UIKIT_36: 1613251417
       UIKIT_32: -527029720
@@ -700,7 +743,6 @@ TextureImporter:
       UIKIT_116: -66732738
       UIKIT_74: 1174540432
       UIKIT_10: 2090144379
-      UIKIT_0: 982647833
       UIKIT_43: -949327742
       UIKIT_55: -775762629
       UIKIT_28: -1631841075
@@ -736,6 +778,7 @@ TextureImporter:
       UIKIT_42: -77414139
       UIKIT_105: -1006459849
       UIKIT_3: 244347420
+      BigSquare: 982647833
       UIKIT_40: -1211433926
       UIKIT_23: -1045556935
       UIKIT_100: 468528723
