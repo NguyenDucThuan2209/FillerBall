@@ -66,4 +66,10 @@ public class SoundManager : MonoBehaviour
     {
         m_soundSource.mute = isMute;
     }
+
+    public void SetAllSoundState(bool isMute)
+    {
+        m_musicSource.mute = isMute;
+        m_soundSource.mute = isMute;
+    }
 }

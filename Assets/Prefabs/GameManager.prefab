@@ -47,3 +47,17 @@ MonoBehaviour:
   m_state: 0
   m_vertical: {x: 0, y: 0}
   m_horizontal: {x: 0, y: 0}
+  m_levels:
+  - {fileID: 6283145202649072187, guid: cc29341f804a37c4a82e6856917e88f9, type: 3}
+  - {fileID: 4443670150894059150, guid: 37ed09acd8bf9e74eac7f09da37c08d3, type: 3}
+  - {fileID: 4339314159740383001, guid: 702524ac70fc7084c90f32b64d89803c, type: 3}
+  - {fileID: 4254599457520623018, guid: c045c180004ef6647b12a46c4463326a, type: 3}
+  - {fileID: 4145729832557330662, guid: 4a6166813b03bf7418daceb7da45e1ac, type: 3}
+  - {fileID: 375235465908121646, guid: 58f5b63b1b43cff4bbe9e823e5bdff8c, type: 3}
+  - {fileID: 4552334312619843388, guid: 99d0e7046d512e14089a0d6b5725ef5e, type: 3}
+  - {fileID: 2466720986745039017, guid: e11e50d5e6e80da4496a23114438b43f, type: 3}
+  - {fileID: 8675891747000725210, guid: c9387e0638c95b84f977e0362f12efb4, type: 3}
+  - {fileID: 5277675816241762767, guid: 60cf378fed62f014bbc3b9e00c4a85e7, type: 3}
+  - {fileID: 6156918504629065210, guid: c5da8ce7e432ed24293d42072a406b16, type: 3}
+  - {fileID: 7345698225044006207, guid: 327843131640140419597f62b7dffdf0, type: 3}
+  m_currentLevel: {fileID: 0}

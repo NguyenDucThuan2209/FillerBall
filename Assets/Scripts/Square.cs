@@ -10,6 +10,8 @@ public class Square : MonoBehaviour
     [SerializeField] SpriteRenderer m_sprite;
     [SerializeField] Collider2D m_collider;
 
+    public Vector2Int Coordinate;
+
     public bool IsHighlighted => m_sprite.color == m_highlightColor;
 
     private void Start()

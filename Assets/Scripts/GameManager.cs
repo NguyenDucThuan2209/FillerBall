@@ -20,9 +20,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameState m_state;
     [SerializeField] Vector2 m_vertical;
     [SerializeField] Vector2 m_horizontal;
+    [Space]
+    [SerializeField] MapManager[] m_levels;
+    [SerializeField] MapManager m_currentLevel;
 
-    private int m_score;
-    private int m_bestScore;
+    private int m_levelIndex = 0;
+    
 
     public GameState State => m_state;
     public Vector2 Vertical => m_vertical;
@@ -48,7 +51,8 @@ public class GameManager : MonoBehaviour
 
     private void ResetGameData()
     {
-        
+        Destroy(m_currentLevel?.gameObject);
+        m_currentLevel = null;
     }
     private void CalculateScreenSize()
     {
@@ -59,32 +63,75 @@ public class GameManager : MonoBehaviour
         m_horizontal = new Vector2(bottomLeft.x, upperRight.x);
     }
 
-    public void StartGame()
+    public void PlayLevel(int level)
     {
         Debug.LogWarning("Start Game");
 
         ResetGameData();
+        m_levelIndex = level;
         m_state = GameState.Playing;
-    }
-    public void PauseGame()
-    {
-        Debug.LogWarning("Pause Game");
+        m_currentLevel = Instantiate(m_levels[m_levelIndex], transform);
 
-        m_state = GameState.Pausing;
+        MenuManager.Instance.SetLevelText(m_levelIndex);
     }
-    public void ResumeGame()
+    public void StartGame()
     {
-        Debug.LogWarning("Resume Game");
+        ResetGameData();
+        m_currentLevel = Instantiate(m_levels[m_levelIndex], transform);
 
-        m_state = GameState.Playing;
+        MenuManager.Instance.SetLevelText(m_levelIndex);
+    }
+    public void RestartGame()
+    {
+        ResetGameData();
+        m_currentLevel = Instantiate(m_levels[m_levelIndex], transform);
+
+        MenuManager.Instance.SetLevelText(m_levelIndex);
     }
     public void EndGame()
     {
         Debug.LogWarning("End Game");
 
-        m_state = GameState.End;
-
         ResetGameData();
+        m_state = GameState.End;
         MenuManager.Instance.EndGame();
     }
+
+    public void NextLevel()
+    {
+        ResetGameData();
+
+        m_levelIndex = (m_levelIndex < m_levels.Length - 1) ? m_levelIndex + 1 : 0;
+        m_currentLevel = Instantiate(m_levels[m_levelIndex], transform);
+
+        MenuManager.Instance.SetLevelText(m_levelIndex);
+        MenuManager.Instance.SetLevelStatus(m_levelIndex);
+    }
+
+    #region IENumerator
+    public static IEnumerator IE_Translate(Transform obj, Vector3 start, Vector3 end, float duration, System.Action callbacks = null)
+    {
+        float t = 0;
+        while (t < duration)
+        {
+            obj.position = Vector3.Lerp(start, end, t / duration);
+            t += Time.deltaTime;
+            yield return null;
+        }
+        obj.position = end;
+        callbacks?.Invoke();
+    }
+    public static IEnumerator IE_Scale(Transform obj, Vector3 start, Vector3 end, float duration, System.Action callbacks = null)
+    {
+        float t = 0;
+        while (t < duration)
+        {
+            obj.localScale = Vector3.Lerp(start, end, t / duration);
+            t += Time.deltaTime;
+            yield return null;
+        }
+        obj.localScale = end;
+        callbacks?.Invoke();
+    }
+    #endregion
 }

@@ -399,6 +399,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_panel: {fileID: 992964148655554373}
+  m_soundNormalColor: {r: 1, g: 1, b: 1, a: 1}
+  m_soundMuteColor: {r: 0.6862745, g: 0.49803922, b: 0.21960784, a: 1}
+  m_soundButton: {fileID: 992964147299829245}
 --- !u!1 &992964147523813346
 GameObject:
   m_ObjectHideFlags: 0
