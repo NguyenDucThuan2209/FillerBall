@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Icon
+    m_Hash: 94799589
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Entry
+      m_Hash: 719368820
+      m_Sprite: {fileID: 755040744, guid: ffca6e8bd3b7b2946840766770f442e0, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 755040744, guid: ffca6e8bd3b7b2946840766770f442e0, type: 3}
+    - m_Name: Entry_0
+      m_Hash: 874506106
+      m_Sprite: {fileID: -188348040, guid: ffca6e8bd3b7b2946840766770f442e0, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -188348040, guid: ffca6e8bd3b7b2946840766770f442e0, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 2
+  - m_Name: Idle
+    m_Hash: 1008081451
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Entry
+      m_Hash: 719368820
+      m_Sprite: {fileID: -2060819678, guid: ffca6e8bd3b7b2946840766770f442e0, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -2060819678, guid: ffca6e8bd3b7b2946840766770f442e0, type: 3}
+    - m_Name: Entry_0
+      m_Hash: 874506106
+      m_Sprite: {fileID: -1164194570, guid: ffca6e8bd3b7b2946840766770f442e0, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1164194570, guid: ffca6e8bd3b7b2946840766770f442e0, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 2
+  - m_Name: Slide_Up
+    m_Hash: 218444883
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Entry
+      m_Hash: 719368820
+      m_Sprite: {fileID: -1764812151, guid: ffca6e8bd3b7b2946840766770f442e0, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1764812151, guid: ffca6e8bd3b7b2946840766770f442e0, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 1
+  - m_Name: Slide_Down
+    m_Hash: 72405505
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Entry
+      m_Hash: 719368820
+      m_Sprite: {fileID: -892498002, guid: ffca6e8bd3b7b2946840766770f442e0, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -892498002, guid: ffca6e8bd3b7b2946840766770f442e0, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 1
+  - m_Name: Slide_Left
+    m_Hash: 583574866
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Entry
+      m_Hash: 719368820
+      m_Sprite: {fileID: -51939602, guid: ffca6e8bd3b7b2946840766770f442e0, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -51939602, guid: ffca6e8bd3b7b2946840766770f442e0, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 1
+  - m_Name: Slide_Right
+    m_Hash: 840827876
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Entry
+      m_Hash: 719368820
+      m_Sprite: {fileID: 1289025958, guid: ffca6e8bd3b7b2946840766770f442e0, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1289025958, guid: ffca6e8bd3b7b2946840766770f442e0, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 1
+  m_PrimaryLibraryGUID: 
