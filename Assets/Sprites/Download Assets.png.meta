@@ -452,6 +452,111 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Knife_1
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 980
+        width: 526
+        height: 92
+      alignment: 9
+      pivot: {x: 0.33515692, y: 0.74383944}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e29b2a6f7f76dd647baee735ef3a454d
+      internalID: 1571996076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knife_2
+      rect:
+        serializedVersion: 2
+        x: 1231
+        y: 702
+        width: 245
+        height: 525
+      alignment: 9
+      pivot: {x: 0.27594817, y: 0.6655341}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14e73453925445843ac900b53037e459
+      internalID: 1808850504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knife_3
+      rect:
+        serializedVersion: 2
+        x: 1645
+        y: 744
+        width: 528
+        height: 245
+      alignment: 9
+      pivot: {x: 0.6668428, y: 0.7148545}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 985d47b8e00f95543ad2e644b12e53cb
+      internalID: 1973028727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knife_4
+      rect:
+        serializedVersion: 2
+        x: 2381
+        y: 743
+        width: 243
+        height: 529
+      alignment: 9
+      pivot: {x: 0.7224101, y: 0.3329453}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4cd8b6e8bb83be4f8959d7592e5cfb6
+      internalID: -555906164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knife_5
+      rect:
+        serializedVersion: 2
+        x: 3085
+        y: 987
+        width: 523
+        height: 240
+      alignment: 9
+      pivot: {x: 0.33073354, y: 0.28253224}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeb31ab6ddcf2e34494220ac28e63369
+      internalID: 1506178297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -463,7 +568,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Download Assets_1: -1512281428
+      Download Assets_2: -1957726715
       Girl_KR_Icon1: 755040744
       Girl_KR_Icon2: -188348040
       Girl_KR_SlidingDown: -892498002
@@ -480,6 +585,11 @@ TextureImporter:
       Girl_VN_SlidingRight: 1363295183
       Girl_VN_Standing1: -139610323
       Girl_VN_Standing2: 2032949714
+      Knife_1: 1571996076
+      Knife_2: 1808850504
+      Knife_3: 1973028727
+      Knife_4: -555906164
+      Knife_5: -1512281428
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
