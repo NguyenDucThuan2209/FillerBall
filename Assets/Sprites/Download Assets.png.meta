@@ -113,6 +113,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -557,6 +569,174 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: SpringRoll_1
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 96
+        width: 450
+        height: 450
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4f87627b31d771448907ca0df9a125f
+      internalID: -531264303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpringRoll_2
+      rect:
+        serializedVersion: 2
+        x: 982
+        y: 96
+        width: 450
+        height: 450
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58ee6f68c1b5d624993c8435b2fe2c3d
+      internalID: -557836533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Banhmi_1
+      rect:
+        serializedVersion: 2
+        x: 1592
+        y: 98
+        width: 450
+        height: 450
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e191045da1aa2c44b6ce057d02c5057
+      internalID: 900632851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Banhmi_2
+      rect:
+        serializedVersion: 2
+        x: 2220
+        y: 98
+        width: 450
+        height: 450
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0184e2d27d49ab24bb72cf10147b5372
+      internalID: -869409119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kimchi_1
+      rect:
+        serializedVersion: 2
+        x: 2853
+        y: 96
+        width: 450
+        height: 450
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b75992752650b749a8c7d9de8ee9ccc
+      internalID: 514447763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kimchi_2
+      rect:
+        serializedVersion: 2
+        x: 3488
+        y: 96
+        width: 450
+        height: 450
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a7b330ccba7df948a301283bf8c911c
+      internalID: 982638293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tteokbokki_1
+      rect:
+        serializedVersion: 2
+        x: 4140
+        y: 96
+        width: 450
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8315fb4949351f54bbd6bc09ed70702a
+      internalID: -1691340699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tteokbokki_2
+      rect:
+        serializedVersion: 2
+        x: 4781
+        y: 96
+        width: 450
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68ef9fbaef378204a9c71a52872504ff
+      internalID: 1365011610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -568,7 +748,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Download Assets_2: -1957726715
+      Banhmi_1: -1957726715
+      Banhmi_2: -869409119
       Girl_KR_Icon1: 755040744
       Girl_KR_Icon2: -188348040
       Girl_KR_SlidingDown: -892498002
@@ -585,11 +766,17 @@ TextureImporter:
       Girl_VN_SlidingRight: 1363295183
       Girl_VN_Standing1: -139610323
       Girl_VN_Standing2: 2032949714
+      Kimchi_1: 514447763
+      Kimchi_2: 982638293
       Knife_1: 1571996076
       Knife_2: 1808850504
       Knife_3: 1973028727
       Knife_4: -555906164
       Knife_5: -1512281428
+      SpringRoll_1: -531264303
+      SpringRoll_2: -557836533
+      Tteokbokki_1: -1691340699
+      Tteokbokki_2: 1365011610
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
