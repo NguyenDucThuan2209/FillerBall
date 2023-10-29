@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 700
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -125,7 +125,7 @@ TextureImporter:
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -146,7 +146,7 @@ TextureImporter:
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -167,7 +167,7 @@ TextureImporter:
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -188,7 +188,7 @@ TextureImporter:
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -209,7 +209,7 @@ TextureImporter:
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -230,7 +230,7 @@ TextureImporter:
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -251,7 +251,7 @@ TextureImporter:
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -272,7 +272,7 @@ TextureImporter:
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -288,12 +288,12 @@ TextureImporter:
       name: Map_Hue_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2100
+        x: 5600
+        y: 2800
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -309,12 +309,12 @@ TextureImporter:
       name: Map_Hue_9
       rect:
         serializedVersion: 2
-        x: 700
+        x: 0
         y: 2100
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -330,12 +330,12 @@ TextureImporter:
       name: Map_Hue_10
       rect:
         serializedVersion: 2
-        x: 1400
+        x: 700
         y: 2100
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -351,12 +351,12 @@ TextureImporter:
       name: Map_Hue_11
       rect:
         serializedVersion: 2
-        x: 2100
+        x: 1400
         y: 2100
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -372,12 +372,12 @@ TextureImporter:
       name: Map_Hue_12
       rect:
         serializedVersion: 2
-        x: 2800
+        x: 2100
         y: 2100
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -393,12 +393,12 @@ TextureImporter:
       name: Map_Hue_13
       rect:
         serializedVersion: 2
-        x: 3500
+        x: 2800
         y: 2100
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -414,12 +414,12 @@ TextureImporter:
       name: Map_Hue_14
       rect:
         serializedVersion: 2
-        x: 4200
+        x: 3500
         y: 2100
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -435,12 +435,12 @@ TextureImporter:
       name: Map_Hue_15
       rect:
         serializedVersion: 2
-        x: 4900
+        x: 4200
         y: 2100
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -456,12 +456,12 @@ TextureImporter:
       name: Map_Hue_16
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1400
+        x: 4900
+        y: 2100
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -477,12 +477,12 @@ TextureImporter:
       name: Map_Hue_17
       rect:
         serializedVersion: 2
-        x: 700
-        y: 1400
+        x: 5600
+        y: 2100
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -498,12 +498,12 @@ TextureImporter:
       name: Map_Hue_18
       rect:
         serializedVersion: 2
-        x: 1400
+        x: 0
         y: 1400
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -519,12 +519,12 @@ TextureImporter:
       name: Map_Hue_19
       rect:
         serializedVersion: 2
-        x: 2100
+        x: 700
         y: 1400
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -540,12 +540,12 @@ TextureImporter:
       name: Map_Hue_20
       rect:
         serializedVersion: 2
-        x: 2800
+        x: 1400
         y: 1400
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -561,12 +561,12 @@ TextureImporter:
       name: Map_Hue_21
       rect:
         serializedVersion: 2
-        x: 3500
+        x: 2100
         y: 1400
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -582,12 +582,12 @@ TextureImporter:
       name: Map_Hue_22
       rect:
         serializedVersion: 2
-        x: 4200
+        x: 2800
         y: 1400
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -603,19 +603,19 @@ TextureImporter:
       name: Map_Hue_23
       rect:
         serializedVersion: 2
-        x: 4900
+        x: 3500
         y: 1400
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8eb72d4b11d28140b79514555a64b8f
-      internalID: 1331937520
+      spriteID: ec29df037ad80a549b276b561947584a
+      internalID: 1729696965
       vertices: []
       indices: 
       edges: []
@@ -624,19 +624,19 @@ TextureImporter:
       name: Map_Hue_24
       rect:
         serializedVersion: 2
-        x: 0
-        y: 700
+        x: 4200
+        y: 1400
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68a18333b31e8d7408867c3bcd2f0416
-      internalID: -347302687
+      spriteID: 46a0dd001df9dc14c8ffe55e9904deb8
+      internalID: -1214383952
       vertices: []
       indices: 
       edges: []
@@ -645,19 +645,19 @@ TextureImporter:
       name: Map_Hue_25
       rect:
         serializedVersion: 2
-        x: 700
-        y: 700
+        x: 4900
+        y: 1400
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7dcb05750f043194ea4683214f345f37
-      internalID: -437694135
+      spriteID: 4e4ad3de65901904fb6433b55f5d226d
+      internalID: 1217288020
       vertices: []
       indices: 
       edges: []
@@ -666,19 +666,19 @@ TextureImporter:
       name: Map_Hue_26
       rect:
         serializedVersion: 2
-        x: 1400
-        y: 700
+        x: 5600
+        y: 1400
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b84aa850115c99942a36e4a8c603abfd
-      internalID: -1005816264
+      spriteID: fa0e751f09f74844ebc2b5f7995bf6d8
+      internalID: -876477620
       vertices: []
       indices: 
       edges: []
@@ -687,19 +687,19 @@ TextureImporter:
       name: Map_Hue_27
       rect:
         serializedVersion: 2
-        x: 2100
+        x: 0
         y: 700
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3b408f031adc5b44bcae4f85a9ab527
-      internalID: 920724896
+      spriteID: 9c266497a883ae545ad07f2fdcadb7c1
+      internalID: 251042771
       vertices: []
       indices: 
       edges: []
@@ -708,19 +708,19 @@ TextureImporter:
       name: Map_Hue_28
       rect:
         serializedVersion: 2
-        x: 2800
+        x: 700
         y: 700
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 517b4a574ca8f3146ba2af8c3bb05adc
-      internalID: -1050953208
+      spriteID: 46e30441b5b540348bebb225d8064903
+      internalID: -1624521230
       vertices: []
       indices: 
       edges: []
@@ -729,19 +729,19 @@ TextureImporter:
       name: Map_Hue_29
       rect:
         serializedVersion: 2
-        x: 3500
+        x: 1400
         y: 700
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a0e04f3e0544374cb93350869c85c2c
-      internalID: 732857204
+      spriteID: b46d9ec43cbcb344cbe7e9c4ae15b111
+      internalID: -2109699638
       vertices: []
       indices: 
       edges: []
@@ -750,19 +750,19 @@ TextureImporter:
       name: Map_Hue_30
       rect:
         serializedVersion: 2
-        x: 4200
+        x: 2100
         y: 700
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b37468e0c6c463d4cb65e7c083a076ca
-      internalID: 161625591
+      spriteID: 220263dcc5731254ab3f1827dc7c9c1a
+      internalID: 276828361
       vertices: []
       indices: 
       edges: []
@@ -771,19 +771,19 @@ TextureImporter:
       name: Map_Hue_31
       rect:
         serializedVersion: 2
-        x: 4900
+        x: 2800
         y: 700
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54377080de26840448b2c1cc64b6dc5c
-      internalID: 637354846
+      spriteID: e2a9792d9d3ac134d9821e994b1627bc
+      internalID: -760992398
       vertices: []
       indices: 
       edges: []
@@ -792,19 +792,19 @@ TextureImporter:
       name: Map_Hue_32
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 3500
+        y: 700
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 531012dccfc579742a494d52d75001fc
-      internalID: -1308253902
+      spriteID: 12b4d3cd02be91f4c9fb26086ef6d469
+      internalID: -1321789097
       vertices: []
       indices: 
       edges: []
@@ -813,19 +813,19 @@ TextureImporter:
       name: Map_Hue_33
       rect:
         serializedVersion: 2
-        x: 700
-        y: 0
+        x: 4200
+        y: 700
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f83b1be556d95d845ba2166907889405
-      internalID: 1246697455
+      spriteID: 0442e8413424ff041ae4d40413a39c17
+      internalID: 1458025087
       vertices: []
       indices: 
       edges: []
@@ -834,19 +834,19 @@ TextureImporter:
       name: Map_Hue_34
       rect:
         serializedVersion: 2
-        x: 1400
-        y: 0
+        x: 4900
+        y: 700
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 069d52ea01c7a594d8037d422ea062d3
-      internalID: 2056359163
+      spriteID: 149d09330a2344447a2b844cef071a11
+      internalID: -2096771288
       vertices: []
       indices: 
       edges: []
@@ -855,19 +855,19 @@ TextureImporter:
       name: Map_Hue_35
       rect:
         serializedVersion: 2
-        x: 2100
-        y: 0
+        x: 5600
+        y: 700
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0876858e7c3c5704bbd42b45cfb33f10
-      internalID: -2139421988
+      spriteID: 9249ee6a49430984b89cef0592b1c7eb
+      internalID: -990015129
       vertices: []
       indices: 
       edges: []
@@ -876,19 +876,19 @@ TextureImporter:
       name: Map_Hue_36
       rect:
         serializedVersion: 2
-        x: 2800
+        x: 0
         y: 0
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d76e2290070cd2c438aa3465b7496c58
-      internalID: 561175525
+      spriteID: 86820fde8e716514ea127a060fec74f9
+      internalID: 803652038
       vertices: []
       indices: 
       edges: []
@@ -897,19 +897,19 @@ TextureImporter:
       name: Map_Hue_37
       rect:
         serializedVersion: 2
-        x: 3500
+        x: 700
         y: 0
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18377378b41dca84d8f8114b710ca148
-      internalID: -220475984
+      spriteID: bd0ae2fa68ce1f54fbcc52bc1d1d6f23
+      internalID: -1351745565
       vertices: []
       indices: 
       edges: []
@@ -918,19 +918,19 @@ TextureImporter:
       name: Map_Hue_38
       rect:
         serializedVersion: 2
-        x: 4200
+        x: 1400
         y: 0
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a8fd1bf9f36e494ab70d71a9447f10c
-      internalID: 405065159
+      spriteID: 58c65f380ea77004ea202241480598b8
+      internalID: -243948765
       vertices: []
       indices: 
       edges: []
@@ -939,19 +939,103 @@ TextureImporter:
       name: Map_Hue_39
       rect:
         serializedVersion: 2
-        x: 4900
+        x: 2100
         y: 0
         width: 700
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4571d3ea4ff35774fafbb38e3d95ad52
-      internalID: 1132776832
+      spriteID: a896de773a5522c49ae94e424c665b83
+      internalID: 873313776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_Hue_40
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 0
+        width: 700
+        height: 700
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40698814e50210e4f8769cbb1fd557a2
+      internalID: 165642104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_Hue_41
+      rect:
+        serializedVersion: 2
+        x: 3500
+        y: 0
+        width: 700
+        height: 700
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbf454071f95f1f439d1b9fa145f3e8a
+      internalID: 734786179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_Hue_42
+      rect:
+        serializedVersion: 2
+        x: 4200
+        y: 0
+        width: 700
+        height: 700
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2af24f8a6c940c4690bb372460085de
+      internalID: 1148217955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_Hue_43
+      rect:
+        serializedVersion: 2
+        x: 5600
+        y: 0
+        width: 700
+        height: 700
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc94973e660a5a6409182f6f548b56d7
+      internalID: 974917124
       vertices: []
       indices: 
       edges: []
@@ -983,25 +1067,29 @@ TextureImporter:
       Map_Hue_20: 2023471592
       Map_Hue_21: 2071088716
       Map_Hue_22: -575155526
-      Map_Hue_23: 1331937520
-      Map_Hue_24: -347302687
-      Map_Hue_25: -437694135
-      Map_Hue_26: -1005816264
-      Map_Hue_27: 920724896
-      Map_Hue_28: -1050953208
-      Map_Hue_29: 732857204
+      Map_Hue_23: 1729696965
+      Map_Hue_24: -1214383952
+      Map_Hue_25: 1217288020
+      Map_Hue_26: -876477620
+      Map_Hue_27: 251042771
+      Map_Hue_28: -1624521230
+      Map_Hue_29: -2109699638
       Map_Hue_3: 1817873573
-      Map_Hue_30: 161625591
-      Map_Hue_31: 637354846
-      Map_Hue_32: -1308253902
-      Map_Hue_33: 1246697455
-      Map_Hue_34: 2056359163
-      Map_Hue_35: -2139421988
-      Map_Hue_36: 561175525
-      Map_Hue_37: -220475984
-      Map_Hue_38: 405065159
-      Map_Hue_39: 1132776832
+      Map_Hue_30: 276828361
+      Map_Hue_31: -760992398
+      Map_Hue_32: -1321789097
+      Map_Hue_33: 1458025087
+      Map_Hue_34: -2096771288
+      Map_Hue_35: -990015129
+      Map_Hue_36: 803652038
+      Map_Hue_37: -1351745565
+      Map_Hue_38: -243948765
+      Map_Hue_39: 873313776
       Map_Hue_4: 1555819041
+      Map_Hue_40: 165642104
+      Map_Hue_41: 734786179
+      Map_Hue_42: 1148217955
+      Map_Hue_43: 974917124
       Map_Hue_5: -73451955
       Map_Hue_6: 211346391
       Map_Hue_7: 83317290
