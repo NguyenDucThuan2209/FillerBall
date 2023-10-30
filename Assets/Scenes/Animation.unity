@@ -304,6 +304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 135257850}
   - component: {fileID: 135257849}
+  - component: {fileID: 135257851}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -341,6 +342,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &135257851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135257848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00dfb59a28e412d40892cb8214bac994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_mapGrid: {fileID: 135257849}
+  m_mapSize: {x: 20, y: 20}
+  m_tileList:
+  - {fileID: 626192980}
+  - {fileID: 953937876}
 --- !u!1 &626192977
 GameObject:
   m_ObjectHideFlags: 0
@@ -4996,7 +5014,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &983410336
 Transform:
   m_ObjectHideFlags: 0
