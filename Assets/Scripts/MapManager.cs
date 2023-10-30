@@ -35,19 +35,27 @@ internal struct TileInfo
 
 public class MapManager : MonoBehaviour
 {
+    private static MapManager m_instance;
+    public static MapManager Instance => m_instance;
+
     [SerializeField] Grid m_mapGrid;
-    [SerializeField] Vector2Int m_mapSize;
+    [SerializeField] Tilemap m_tileBoundary;
     [SerializeField] Tilemap[] m_tileList;
 
     private TileInfo[,] m_tilemapData;
 
+    private void Awake()
+    {
+        if (m_instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        m_instance = this;
+    }
     private void Start()
     {
         InitializeMap();
-    }
-    private void Update()
-    {        
-        
     }
     
     private void InitializeMap()
@@ -58,22 +66,23 @@ public class MapManager : MonoBehaviour
             tilesHolder.Add(tilemap.GetTilesBlock(tilemap.cellBounds));
         }
 
-        m_tilemapData = new TileInfo[m_mapSize.x, m_mapSize.y];
-        for (int i = 0; i < m_mapSize.x; i++)
+        var tileSize = m_tileBoundary.cellSize;
+        var tilePos = m_tileBoundary.cellBounds.position;
+        m_tilemapData = new TileInfo[m_tileBoundary.cellBounds.size.x, 
+                                     m_tileBoundary.cellBounds.size.y];
+        for (int i = 0; i < m_tileBoundary.cellBounds.size.x; i++)
         {
-            for (int j = 0; j < m_mapSize.y; j++)
+            var xPos = (int)(i * tileSize.x) + tilePos.x;
+
+            for (int j = 0; j < m_tileBoundary.cellBounds.size.y; j++)
             {
                 var tile = new TileInfo();
-                var index = i * m_mapSize.x + j;
+                var yPos = (int)(j * tileSize.y) + tilePos.y;
+                var currentPos = new Vector3Int(xPos, yPos, 0);
 
                 for (int k = 0; k < m_tileList.Length; k++)
                 {
-                    Debug.Log(k + "|" + index + "|" + i + "|" + j);
-                    if (tilesHolder[k].Length < index)
-                    {
-
-                    }
-                    if (tilesHolder[k][index] == null) continue;
+                    if (m_tileList[k].GetTile(currentPos) == null) continue;
 
                     tile.Type = (TileType)k;
                     tile.Coordinate = new Vector2Int(i, j);
@@ -84,11 +93,11 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < m_mapSize.x; i++)
+        for (int i = 0; i < m_tileBoundary.cellBounds.x; i++)
         {
-            for (int j = 0; j < m_mapSize.y; j++)
+            for (int j = 0; j < m_tileBoundary.cellBounds.y; j++)
             {
-                Debug.LogWarning($"{i},{j}: {m_tilemapData[i, j]}");
+
             }
         }
     }
@@ -97,11 +106,33 @@ public class MapManager : MonoBehaviour
         
     }
 
-    private Vector2Int GetTargetCoordinate(Vector2Int start, Vector2Int diff)
+    public Vector2Int GetTargetCoordinate(Vector2Int start, Vector2Int diff)
     {
         var pos = start;
         
+        while (0 <= pos.x && pos.x < m_tileBoundary.cellBounds.size.x
+            || 0 <= pos.y && pos.y < m_tileBoundary.cellBounds.size.y)
+        {
+            if (m_tilemapData[pos.x, pos.y].Type == TileType.Ground)
+            {
+                //Debug.Log($"Hit Ground: {m_tilemapData[pos.x, pos.y].WorldPosition}");
+                return pos -= diff;
+            }
+            pos += diff;
+        }
 
-        return pos -= diff;
+        return pos + diff;
+    }
+    public Vector3 GetTargetWorldPos(Vector2Int start, Vector2Int diff)
+    {
+        var coor = GetTargetCoordinate(start, diff);
+
+        var tileSize = m_tileBoundary.cellSize;
+        var tilePos = m_tileBoundary.cellBounds.position;
+        var worldPos = new Vector3(coor.x * tileSize.x + tilePos.x,
+                                   coor.y * tileSize.y + tilePos.y,
+                                   0);
+
+        return worldPos;
     }
 }
