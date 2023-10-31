@@ -6,7 +6,8 @@ using UnityEngine.Tilemaps;
 public enum TileType
 {
     Ground = 0,
-    Moveable = 0,
+    Moveable = 1,
+    StopPoint = 2,
 }
 
 [System.Serializable]
@@ -108,19 +109,29 @@ public class MapManager : MonoBehaviour
 
     public Vector2Int GetTargetCoordinate(Vector2Int start, Vector2Int diff)
     {
-        var pos = start;
+        var pos = start + diff;
         
         while (0 <= pos.x && pos.x < m_tileBoundary.cellBounds.size.x
             || 0 <= pos.y && pos.y < m_tileBoundary.cellBounds.size.y)
         {
-            if (m_tilemapData[pos.x, pos.y].Type == TileType.Ground)
+            switch (m_tilemapData[pos.x, pos.y].Type)
             {
-                //Debug.Log($"Hit Ground: {m_tilemapData[pos.x, pos.y].WorldPosition}");
-                return pos -= diff;
+                case TileType.Ground:
+                    {
+                        return pos -= diff;
+                    }
+                case TileType.StopPoint:
+                    {
+                        return pos;
+                    }
+                case TileType.Moveable:
+                    {
+                        pos += diff;
+                    }
+                    break;
             }
-            pos += diff;
+            //Debug.Log($"Hit Ground: {m_tilemapData[pos.x, pos.y].WorldPosition}");
         }
-
         return pos + diff;
     }
     public Vector3 GetTargetWorldPos(Vector2Int start, Vector2Int diff)

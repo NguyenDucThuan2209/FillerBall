@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    [SerializeField] float m_speed = 1f;
     [SerializeField] Animator m_animator;
     [SerializeField] Vector2Int m_currentCoordiante;
 
     private Vector2 m_startPosition;
     private Vector2 m_endPosition;
+    private bool m_isSliding;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -24,12 +26,15 @@ public class Character : MonoBehaviour
     }
     private void Update()
     {
+        if (m_isSliding) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             m_startPosition = Input.mousePosition;
         }
         if (Input.GetMouseButtonUp(0))
         {
+            m_isSliding = true;
             m_endPosition = Input.mousePosition;
 
             var xDiff = Mathf.Abs(m_endPosition.x - m_startPosition.x);
@@ -49,8 +54,12 @@ public class Character : MonoBehaviour
                     StartCoroutine(Utilities.IE_WorldTranslate(transform,
                                                                transform.position,
                                                                targetPos,
-                                                               1f,
-                                                               () => m_currentCoordiante = targetCoor
+                                                               m_speed * Mathf.Abs(m_currentCoordiante.x - targetCoor.x),
+                                                               () =>
+                                                               {
+                                                                   m_currentCoordiante = targetCoor;
+                                                                   m_isSliding = false;
+                                                               }
                                                                ));
                 }
                 else
@@ -63,8 +72,12 @@ public class Character : MonoBehaviour
                     StartCoroutine(Utilities.IE_WorldTranslate(transform,
                                                                transform.position,
                                                                targetPos,
-                                                               1f,
-                                                               () => m_currentCoordiante = targetCoor
+                                                               m_speed * Mathf.Abs(m_currentCoordiante.x - targetCoor.x),
+                                                               () =>
+                                                               {
+                                                                   m_currentCoordiante = targetCoor;
+                                                                   m_isSliding = false;
+                                                               }
                                                                ));
                 }
             }
@@ -81,8 +94,12 @@ public class Character : MonoBehaviour
                     StartCoroutine(Utilities.IE_WorldTranslate(transform,
                                                                transform.position,
                                                                targetPos,
-                                                               1f,
-                                                               () => m_currentCoordiante = targetCoor
+                                                               m_speed * Mathf.Abs(m_currentCoordiante.y - targetCoor.y),
+                                                               () =>
+                                                               {
+                                                                   m_currentCoordiante = targetCoor;
+                                                                   m_isSliding = false;
+                                                               }
                                                                ));
                 }
                 else
@@ -95,8 +112,12 @@ public class Character : MonoBehaviour
                     StartCoroutine(Utilities.IE_WorldTranslate(transform,
                                                                transform.position,
                                                                targetPos,
-                                                               1f,
-                                                               () => m_currentCoordiante = targetCoor
+                                                               m_speed * Mathf.Abs(m_currentCoordiante.y - targetCoor.y),
+                                                               () =>
+                                                               {
+                                                                   m_currentCoordiante = targetCoor;
+                                                                   m_isSliding = false;
+                                                               }
                                                                ));
                 }
             }
