@@ -8,6 +8,7 @@ public class Character : MonoBehaviour
     [SerializeField] Animator m_animator;
     [SerializeField] Vector2Int m_currentCoordiante;
 
+    private Vector2Int m_currentDirection;
     private Vector2 m_startPosition;
     private Vector2 m_endPosition;
     private bool m_isSliding;
@@ -28,6 +29,8 @@ public class Character : MonoBehaviour
     {
         if (m_isSliding) return;
 
+        m_currentDirection = Vector2Int.zero;
+
         if (Input.GetMouseButtonDown(0))
         {
             m_startPosition = Input.mousePosition;
@@ -47,10 +50,10 @@ public class Character : MonoBehaviour
                 if (m_startPosition.x < m_endPosition.x)
                 {
                     // Move to the right square
-                    var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante,
-                                                                             new Vector2Int(1, 0));
-                    var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, 
-                                                                       new Vector2Int(1, 0));
+                    m_currentDirection = new Vector2Int(1, 0);
+
+                    var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
+                    var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
                     StartCoroutine(Utilities.IE_WorldTranslate(transform,
                                                                transform.position,
                                                                targetPos,
@@ -65,10 +68,10 @@ public class Character : MonoBehaviour
                 else
                 {
                     // Move to the left square
-                    var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante,
-                                                                             new Vector2Int(-1, 0));
-                    var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante,
-                                                                       new Vector2Int(-1, 0));
+                    m_currentDirection = new Vector2Int(-1, 0);
+
+                    var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
+                    var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
                     StartCoroutine(Utilities.IE_WorldTranslate(transform,
                                                                transform.position,
                                                                targetPos,
@@ -87,10 +90,10 @@ public class Character : MonoBehaviour
                 if (m_startPosition.y < m_endPosition.y)
                 {
                     // Move to upper square
-                    var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante,
-                                                                             new Vector2Int(0, 1));
-                    var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante,
-                                                                       new Vector2Int(0, 1));
+                    m_currentDirection = new Vector2Int(0, 1);
+
+                    var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
+                    var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
                     StartCoroutine(Utilities.IE_WorldTranslate(transform,
                                                                transform.position,
                                                                targetPos,
@@ -105,10 +108,10 @@ public class Character : MonoBehaviour
                 else
                 {
                     // Move to lower square
-                    var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante,
-                                                                             new Vector2Int(0, -1));
-                    var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante,
-                                                                       new Vector2Int(0, -1));
+                    m_currentDirection = new Vector2Int(0, -1);
+                    
+                    var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
+                    var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
                     StartCoroutine(Utilities.IE_WorldTranslate(transform,
                                                                transform.position,
                                                                targetPos,
@@ -122,5 +125,8 @@ public class Character : MonoBehaviour
                 }
             }
         }
+
+        m_animator.SetFloat("X_Direction", m_currentDirection.x);
+        m_animator.SetFloat("Y_Direction", m_currentDirection.y);
     }
 }
