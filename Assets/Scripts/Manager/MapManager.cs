@@ -41,9 +41,12 @@ public class MapManager : MonoBehaviour
 
     [SerializeField] Grid m_mapGrid;
     [SerializeField] Tilemap m_tileBoundary;
+    [SerializeField] Vector2Int m_spawnPoint;
     [SerializeField] Tilemap[] m_tileList;
-
+    
     private TileInfo[,] m_tilemapData;
+
+    public Vector2Int SpawnPoint => m_spawnPoint;
 
     private void Awake()
     {
@@ -112,7 +115,7 @@ public class MapManager : MonoBehaviour
         var pos = start + diff;
         
         while (0 <= pos.x && pos.x < m_tileBoundary.cellBounds.size.x
-            || 0 <= pos.y && pos.y < m_tileBoundary.cellBounds.size.y)
+            && 0 <= pos.y && pos.y < m_tileBoundary.cellBounds.size.y)
         {
             switch (m_tilemapData[pos.x, pos.y].Type)
             {
@@ -132,7 +135,7 @@ public class MapManager : MonoBehaviour
             }
             //Debug.Log($"Hit Ground: {m_tilemapData[pos.x, pos.y].WorldPosition}");
         }
-        return pos + diff;
+        return pos - diff;
     }
     public Vector3 GetTargetWorldPos(Vector2Int start, Vector2Int diff)
     {
@@ -142,6 +145,16 @@ public class MapManager : MonoBehaviour
         var tilePos = m_tileBoundary.cellBounds.position;
         var worldPos = new Vector3(coor.x * tileSize.x + tilePos.x,
                                    coor.y * tileSize.y + tilePos.y,
+                                   0);
+
+        return worldPos;
+    }
+    public Vector3 GetSpawnWorldPos()
+    {
+        var tileSize = m_tileBoundary.cellSize;
+        var tilePos = m_tileBoundary.cellBounds.position;
+        var worldPos = new Vector3(m_spawnPoint.x * tileSize.x + tilePos.x,
+                                   m_spawnPoint.y * tileSize.y + tilePos.y,
                                    0);
 
         return worldPos;
