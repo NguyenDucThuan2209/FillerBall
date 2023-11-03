@@ -21,6 +21,11 @@ public class Character : MonoBehaviour
             Debug.LogWarning($"OnCollisionEnter2D: {obstacle.name}");
             OnObstacleHit();
         }
+        if (collision.transform.TryGetComponent(out Food food))
+        {
+            Debug.LogWarning($"OnTriggerEnter2D: {food.name}");
+            OnFoodHit(food);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -36,7 +41,7 @@ public class Character : MonoBehaviour
     }
     private void Start()
     {
-        StartCoroutine(Respawn());
+        StartCoroutine(Respawn(0f));
     }
     private void Update()
     {
@@ -66,17 +71,20 @@ public class Character : MonoBehaviour
                     m_currentDirection = new Vector2Int(1, 0);
 
                     var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
-                    var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
-                    m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
-                                                                                     transform.position,
-                                                                                     targetPos,
-                                                                                     m_speed * Mathf.Abs(m_currentCoordiante.x - targetCoor.x),
-                                                                                     () =>
-                                                                                     {
-                                                                                         m_currentCoordiante = targetCoor;
-                                                                                         m_isSliding = false;
-                                                                                     }
-                                                                                     ));
+                    if (targetCoor != m_currentCoordiante)
+                    {
+                        var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
+                        m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
+                                                                                         transform.position,
+                                                                                         targetPos,
+                                                                                         m_speed * Mathf.Abs(m_currentCoordiante.x - targetCoor.x),
+                                                                                         () =>
+                                                                                         {
+                                                                                             m_currentCoordiante = targetCoor;
+                                                                                             m_isSliding = false;
+                                                                                         }
+                                                                                         ));
+                    }
                 }
                 else
                 {
@@ -84,17 +92,20 @@ public class Character : MonoBehaviour
                     m_currentDirection = new Vector2Int(-1, 0);
 
                     var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
-                    var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
-                    m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
-                                                                                    transform.position,
-                                                                                    targetPos,
-                                                                                    m_speed * Mathf.Abs(m_currentCoordiante.x - targetCoor.x),
-                                                                                    () =>
-                                                                                    {
-                                                                                        m_currentCoordiante = targetCoor;
-                                                                                        m_isSliding = false;
-                                                                                    }
-                                                                                    ));
+                    if (targetCoor != m_currentCoordiante)
+                    {
+                        var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
+                        m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
+                                                                                        transform.position,
+                                                                                        targetPos,
+                                                                                        m_speed * Mathf.Abs(m_currentCoordiante.x - targetCoor.x),
+                                                                                        () =>
+                                                                                        {
+                                                                                            m_currentCoordiante = targetCoor;
+                                                                                            m_isSliding = false;
+                                                                                        }
+                                                                                        ));
+                    }
                 }
             }
             else
@@ -106,17 +117,20 @@ public class Character : MonoBehaviour
                     m_currentDirection = new Vector2Int(0, 1);
 
                     var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
-                    var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
-                    m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
-                                                                                     transform.position,
-                                                                                     targetPos,
-                                                                                     m_speed * Mathf.Abs(m_currentCoordiante.y - targetCoor.y),
-                                                                                     () =>
-                                                                                     {
-                                                                                         m_currentCoordiante = targetCoor;
-                                                                                         m_isSliding = false;
-                                                                                     }
-                                                                                     ));
+                    if (targetCoor != m_currentCoordiante)
+                    {
+                        var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
+                        m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
+                                                                                         transform.position,
+                                                                                         targetPos,
+                                                                                         m_speed * Mathf.Abs(m_currentCoordiante.y - targetCoor.y),
+                                                                                         () =>
+                                                                                         {
+                                                                                             m_currentCoordiante = targetCoor;
+                                                                                             m_isSliding = false;
+                                                                                         }
+                                                                                         ));
+                    }
                 }
                 else
                 {
@@ -124,17 +138,20 @@ public class Character : MonoBehaviour
                     m_currentDirection = new Vector2Int(0, -1);
                     
                     var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
-                    var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
-                    m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
-                                                                                     transform.position,
-                                                                                     targetPos,
-                                                                                     m_speed * Mathf.Abs(m_currentCoordiante.y - targetCoor.y),
-                                                                                     () =>
-                                                                                     {
-                                                                                         m_currentCoordiante = targetCoor;
-                                                                                         m_isSliding = false;
-                                                                                     }
-                                                                                     ));
+                    if (targetCoor != m_currentCoordiante)
+                    {
+                        var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
+                        m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
+                                                                                         transform.position,
+                                                                                         targetPos,
+                                                                                         m_speed * Mathf.Abs(m_currentCoordiante.y - targetCoor.y),
+                                                                                         () =>
+                                                                                         {
+                                                                                             m_currentCoordiante = targetCoor;
+                                                                                             m_isSliding = false;
+                                                                                         }
+                                                                                         ));
+                    }
                 }
             }
         }
@@ -143,7 +160,7 @@ public class Character : MonoBehaviour
         m_animator.SetFloat("Y_Direction", m_currentDirection.y);
     }
 
-    private IEnumerator Respawn(float delay = 0f)
+    private IEnumerator Respawn(float delay = 1f)
     {
         yield return new WaitForSeconds(delay);
 
@@ -166,7 +183,10 @@ public class Character : MonoBehaviour
         m_animator.SetFloat("X_Direction", 0);
         m_animator.SetFloat("Y_Direction", 0);
 
-        var animation = m_animator.GetCurrentAnimatorClipInfo(0)[0];
-        StartCoroutine(Respawn(animation.clip.length));
+        StartCoroutine(Respawn());
+    }
+    private void OnFoodHit(Food food)
+    {
+        food.OnFoodConsumed();
     }
 }

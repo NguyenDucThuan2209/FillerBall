@@ -39,11 +39,15 @@ public class MapManager : MonoBehaviour
     private static MapManager m_instance;
     public static MapManager Instance => m_instance;
 
+    [Space]
     [SerializeField] Grid m_mapGrid;
+    [SerializeField] Food m_foodPrefab;
     [SerializeField] Tilemap m_tileBoundary;
     [SerializeField] Vector2Int m_spawnPoint;
+    [Space]
     [SerializeField] Tilemap[] m_tileList;
-    
+    [SerializeField] Vector2[] m_foodCoor;
+
     private TileInfo[,] m_tilemapData;
 
     public Vector2Int SpawnPoint => m_spawnPoint;
@@ -74,6 +78,8 @@ public class MapManager : MonoBehaviour
         var tilePos = m_tileBoundary.cellBounds.position;
         m_tilemapData = new TileInfo[m_tileBoundary.cellBounds.size.x, 
                                      m_tileBoundary.cellBounds.size.y];
+
+        Debug.LogWarning(tileSize + "|" + tilePos + "|" + m_tileBoundary.cellBounds);
         for (int i = 0; i < m_tileBoundary.cellBounds.size.x; i++)
         {
             var xPos = (int)(i * tileSize.x) + tilePos.x;
