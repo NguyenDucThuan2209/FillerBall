@@ -16,6 +16,11 @@ public class Character : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.transform.TryGetComponent(out AchievePoint achievePoint))
+        {
+            Debug.LogWarning($"OnCollisionEnter2D: {achievePoint.name}");
+
+        }
         if (collision.transform.TryGetComponent(out Obstacle obstacle))
         {
             Debug.LogWarning($"OnCollisionEnter2D: {obstacle.name}");
@@ -23,20 +28,16 @@ public class Character : MonoBehaviour
         }
         if (collision.transform.TryGetComponent(out Food food))
         {
-            Debug.LogWarning($"OnTriggerEnter2D: {food.name}");
+            Debug.LogWarning($"OnCollisionEnter2D: {food.name}");
             OnFoodHit(food);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.TryGetComponent(out Obstacle obstacle))
+        if (collision.transform.TryGetComponent(out Fork fork))
         {
-            Debug.LogWarning($"OnTriggerEnter2D: {obstacle.name}");
-            OnObstacleHit();
-        }
-        if (collision.transform.TryGetComponent(out Food food))
-        {
-            Debug.LogWarning($"OnTriggerEnter2D: {food.name}");
+            Debug.LogWarning($"OnTriggerEnter2D: {fork.name}");
+            fork.ShowFork();
         }
     }
     private void Start()
@@ -55,7 +56,6 @@ public class Character : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            m_isSliding = true;
             m_endPosition = Input.mousePosition;
 
             var xDiff = Mathf.Abs(m_endPosition.x - m_startPosition.x);
@@ -73,6 +73,7 @@ public class Character : MonoBehaviour
                     var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
                     if (targetCoor != m_currentCoordiante)
                     {
+                        m_isSliding = true;
                         var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
                         m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
                                                                                          transform.position,
@@ -85,6 +86,10 @@ public class Character : MonoBehaviour
                                                                                          }
                                                                                          ));
                     }
+                    else
+                    {
+                        m_currentDirection = Vector2Int.zero;
+                    }
                 }
                 else
                 {
@@ -94,6 +99,7 @@ public class Character : MonoBehaviour
                     var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
                     if (targetCoor != m_currentCoordiante)
                     {
+                        m_isSliding = true;
                         var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
                         m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
                                                                                         transform.position,
@@ -105,6 +111,10 @@ public class Character : MonoBehaviour
                                                                                             m_isSliding = false;
                                                                                         }
                                                                                         ));
+                    }
+                    else
+                    {
+                        m_currentDirection = Vector2Int.zero;
                     }
                 }
             }
@@ -119,6 +129,7 @@ public class Character : MonoBehaviour
                     var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
                     if (targetCoor != m_currentCoordiante)
                     {
+                        m_isSliding = true;
                         var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
                         m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
                                                                                          transform.position,
@@ -131,6 +142,10 @@ public class Character : MonoBehaviour
                                                                                          }
                                                                                          ));
                     }
+                    else
+                    {
+                        m_currentDirection = Vector2Int.zero;
+                    }
                 }
                 else
                 {
@@ -140,6 +155,7 @@ public class Character : MonoBehaviour
                     var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
                     if (targetCoor != m_currentCoordiante)
                     {
+                        m_isSliding = true;
                         var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
                         m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
                                                                                          transform.position,
@@ -151,6 +167,10 @@ public class Character : MonoBehaviour
                                                                                              m_isSliding = false;
                                                                                          }
                                                                                          ));
+                    }
+                    else
+                    {
+                        m_currentDirection = Vector2Int.zero;
                     }
                 }
             }

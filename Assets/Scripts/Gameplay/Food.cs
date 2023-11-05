@@ -21,10 +21,13 @@ public class Food : MonoBehaviour
         m_animator.SetInteger("Type", (int)m_type);
     }
 
+    public void Initialize(Type type)
+    {
+        m_type = type;
+    }
     public void OnFoodConsumed()
     {
-        m_animator.SetTrigger("Achieve");
-        var animation = m_animator.GetCurrentAnimatorClipInfo(0)[0];
-        Destroy(gameObject, 1.5f);
+        MapManager.Instance.ConsumedFood(transform.position);
+        Destroy(gameObject);
     }
 }
