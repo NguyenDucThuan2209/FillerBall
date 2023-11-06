@@ -15,7 +15,6 @@ public enum TileType
 internal struct TileInfo
 {
     private TileType m_type;
-    private Vector3 m_worldPosition;
     private Vector2Int m_coordinate;
  
     public TileType Type
@@ -28,20 +27,15 @@ internal struct TileInfo
         get => m_coordinate;
         set => m_coordinate = value;
     }
-    public Vector3 WorldPosition
-    {
-        get => m_worldPosition;
-        set => m_worldPosition = value;
-    }
 }
 [System.Serializable]
 internal struct KnifeData
 {
-    [SerializeField] Vector3 m_startPoint;
-    [SerializeField] Vector3 m_endPoint;
+    [SerializeField] Vector2Int m_startPoint;
+    [SerializeField] Vector2Int m_endPoint;
 
-    public Vector3 StartPoint => m_startPoint;
-    public Vector3 EndPoint => m_endPoint;
+    public Vector2Int StartPoint => m_startPoint;
+    public Vector2Int EndPoint => m_endPoint;
 }
 [System.Serializable]
 internal struct ForkData
@@ -64,10 +58,9 @@ public class MapManager : MonoBehaviour
     [SerializeField] Vector2Int m_spawnPoint;
     [SerializeField] Vector2Int m_achivePointCoor;
     [SerializeField] Vector2 m_tileSize = new Vector2(1f, 1f);
-    [SerializeField] Vector2Int m_tileStartPosition = new Vector2Int(-10, -10);
+    [SerializeField] Vector3 m_tileOffset = new Vector3(0.5f, 0.5f);
     [SerializeField] Vector2Int m_mapGridBoundarySize = new Vector2Int(20, 20);
     [Space]
-    [SerializeField] Grid m_mapGrid;
     [SerializeField] Star m_starPrefab;
     [SerializeField] Food m_foodPrefab;
     [SerializeField] Fork m_forkPrefab;
@@ -79,7 +72,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] Tilemap[] m_tileList;
     [SerializeField] ForkData[] m_forkList;
     [SerializeField] KnifeData[] m_knifeList;
-    [SerializeField] Vector3Int[] m_foodCoor;
+    [SerializeField] Vector2Int[] m_foodCoor;
 
     private int m_foodConsumed;
     private TileInfo[,] m_tilemapData;
@@ -121,9 +114,7 @@ public class MapManager : MonoBehaviour
             for (int j = 0; j < m_mapGridBoundarySize.y; j++)
             {
                 var text = $"{i}, {j}";
-                var worldPos = new Vector3(i * m_tileSize.x + m_tileStartPosition.x,
-                                           j * m_tileSize.y + m_tileStartPosition.y,
-                                           0);
+                var worldPos = GetWorlPositionFromCoordiante(new Vector2Int(i, j));
                 Gizmos.DrawCube(worldPos, Vector3.one * 0.95f);
                 Handles.Label(worldPos, text, style);
             }
@@ -144,12 +135,12 @@ public class MapManager : MonoBehaviour
 
         for (int i = 0; i < m_mapGridBoundarySize.x; i++)
         {
-            var xPos = (int)(i * m_tileSize.x) + m_tileStartPosition.x;
+            var xPos = (int)(i * m_tileSize.x);
 
             for (int j = 0; j < m_mapGridBoundarySize.y; j++)
             {
                 var tile = new TileInfo();
-                var yPos = (int)(j * m_tileSize.y) + m_tileStartPosition.y;
+                var yPos = (int)(j * m_tileSize.y);
                 var currentPos = new Vector3Int(xPos, yPos, 0);
 
                 for (int k = 0; k < m_tileList.Length; k++)
@@ -158,7 +149,6 @@ public class MapManager : MonoBehaviour
 
                     tile.Type = (TileType)k;
                     tile.Coordinate = new Vector2Int(i, j);
-                    tile.WorldPosition = m_mapGrid.GetCellCenterWorld(new Vector3Int(i, j, 0));
 
                     m_tilemapData[i, j] = tile;
                 }
@@ -178,7 +168,7 @@ public class MapManager : MonoBehaviour
     {
         for (int i = 0; i < m_forkList.Length; i++)
         {
-            var worldPos = GetWorlPositionFromCoordiante(new Vector3(m_forkList[i].Coordinate.x, m_forkList[i].Coordinate.y, 0f));
+            var worldPos = GetWorlPositionFromCoordiante(m_forkList[i].Coordinate);
             var fork = Instantiate(m_forkPrefab, worldPos, Quaternion.identity);
             fork.transform.eulerAngles = m_forkList[i].Rotation;
         }
@@ -196,12 +186,14 @@ public class MapManager : MonoBehaviour
     }
     private void InitializeCharacter()
     {
-        var worldPos = GetWorlPositionFromCoordiante(new Vector3(m_spawnPoint.x, m_spawnPoint.y, 0f));
-        Instantiate(m_characterPrefab, worldPos, Quaternion.identity);
+        var worldPos = GetWorlPositionFromCoordiante(m_spawnPoint);
+        var character = Instantiate(m_characterPrefab, worldPos, Quaternion.identity);
+
+        CameraController.Instance.AssignFollowingTarget(character.transform);
     }
     private void InitializeAchivePoint()
     {
-        var worldPos = GetWorlPositionFromCoordiante(new Vector3(m_achivePointCoor.x, m_achivePointCoor.y, 0));
+        var worldPos = GetWorlPositionFromCoordiante(m_achivePointCoor);
         m_achievePoint = Instantiate(m_achievePointPrefab, worldPos, Quaternion.identity);
     }
 
@@ -217,10 +209,10 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    public Vector3 GetWorlPositionFromCoordiante(Vector3 coor)
+    public Vector3 GetWorlPositionFromCoordiante(Vector2Int coor)
     {
-        var worldPos = new Vector3(coor.x * m_tileSize.x + m_tileStartPosition.x,
-                                   coor.y * m_tileSize.y + m_tileStartPosition.y,
+        var worldPos = new Vector3(coor.x * m_tileSize.x + m_tileOffset.x,
+                                   coor.y * m_tileSize.y + m_tileOffset.y,
                                    0);
         return worldPos;
     }
@@ -254,13 +246,13 @@ public class MapManager : MonoBehaviour
     public Vector3 GetTargetWorldPos(Vector2Int start, Vector2Int diff)
     {
         var coor = GetTargetCoordinate(start, diff);
-        var worldPos = GetWorlPositionFromCoordiante(new Vector3(coor.x, coor.y, 0f));
+        var worldPos = GetWorlPositionFromCoordiante(coor);
 
         return worldPos;
     }
     public Vector3 GetSpawnWorldPos()
     {
-        var worldPos = GetWorlPositionFromCoordiante(new Vector3(m_spawnPoint.x, m_spawnPoint.y, 0f));
+        var worldPos = GetWorlPositionFromCoordiante(m_spawnPoint);
         return worldPos;
     }
 }
