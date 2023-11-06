@@ -13,6 +13,13 @@ public class Character : MonoBehaviour
     private Vector2 m_startPosition;
     private Vector2 m_endPosition;
     private bool m_isSliding;
+    private bool m_isPause;
+
+    public bool IsPause
+    {
+        get => m_isPause;
+        set => m_isPause = value;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -46,7 +53,7 @@ public class Character : MonoBehaviour
     }
     private void Update()
     {
-        if (m_isSliding) return;
+        if (m_isSliding || m_isPause) return;
 
         m_currentDirection = Vector2Int.zero;
 

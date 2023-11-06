@@ -8,9 +8,9 @@ public class Food : MonoBehaviour
     {
         Banhmi = 0,
         SpringRoll = 1,
-        Tteokbokki = 2,
+        BlackPork = 2,
         Kimchi = 3,
-        Kimbap = 4,
+        Keome = 4,
     }
 
     [SerializeField] Type m_type;

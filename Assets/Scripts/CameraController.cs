@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour
 {
@@ -13,8 +14,9 @@ public class CameraController : MonoBehaviour
     public static CameraController Instance => m_instance;
 
     [SerializeField] Camera m_camera;
-    [SerializeField] Vector3 m_offset;
-    [SerializeField] float m_followSpeed = 3f;
+    [SerializeField] Image m_fadePanel;
+    [SerializeField] Vector3 m_cameraOffset;
+    [SerializeField] float m_followSpeed = 5f;
     [SerializeField] float m_zoomInRatio = 5f;
     [SerializeField] float m_zoomOutRatio = 15f;
 
@@ -35,7 +37,7 @@ public class CameraController : MonoBehaviour
     {
         if (!m_isFollowingTarget) return;
 
-        var currentFramePos = Vector3.Lerp(transform.position, m_followingTarget.position + m_offset, m_followSpeed * Time.deltaTime);
+        var currentFramePos = Vector3.Lerp(transform.position, m_followingTarget.position + m_cameraOffset, m_followSpeed * Time.deltaTime);
         transform.position = currentFramePos;
 
         m_camera.orthographicSize = m_zoomInRatio;
@@ -55,28 +57,60 @@ public class CameraController : MonoBehaviour
         }
         callback?.Invoke();
     }
+    private IEnumerator IE_FadingCamera(bool isFadeOut, float duration, System.Action callback = null)
+    {
+        float t = 0;
+        while (t < duration)
+        {
+            var alphaRatio = (isFadeOut) ? Mathf.Lerp(1f, 0f, t / duration) : Mathf.Lerp(0f, 1f, t / duration);
+            m_fadePanel.color = new Color(m_fadePanel.color.r, m_fadePanel.color.g, m_fadePanel.color.b, alphaRatio);
+            t += Time.deltaTime;
+            yield return null;
+        }
+        callback?.Invoke();
+    }
 
-    public void FocusOnTarget(Vector3 position, State state)
+    public void FocusOnTarget(Vector3 target, State state, float duration = 1f, System.Action callback = null)
     {
         m_isFollowingTarget = false;
         switch (state)
         {
             case State.ZoomIn:
                 {
-
+                    StartCoroutine(IE_Zooming(state, duration));
+                    StartCoroutine(Utilities.IE_WorldTranslate(transform, 
+                                                               transform.position, 
+                                                               target + m_cameraOffset, 
+                                                               duration, 
+                                                               callback
+                                                               ));
                 }
                 break;
 
             case State.ZoomOut:
                 {
-
+                    StartCoroutine(IE_Zooming(state, duration));
+                    StartCoroutine(Utilities.IE_WorldTranslate(transform, 
+                                                               transform.position, 
+                                                               target + m_cameraOffset, 
+                                                               duration, 
+                                                               callback
+                                                               ));
                 }
                 break;
         }
     }
-    public void AssignFollowingTarget(Transform target)
+    public void FadingCameraScreen(bool isFadeOut, float duration = 1f, System.Action callback = null)
+    {
+        StartCoroutine(IE_FadingCamera(isFadeOut, duration, callback));
+    }
+    public void AssignFollowingTarget(Transform target, float duration = 2f, System.Action callback = null)
     {
         m_followingTarget = target;
-        m_isFollowingTarget = true;
+        FocusOnTarget(target.position, State.ZoomIn, duration, () =>
+                                                               {
+                                                                   m_isFollowingTarget = true;
+                                                                   callback?.Invoke();
+                                                               });
     }
 }

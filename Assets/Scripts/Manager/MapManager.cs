@@ -75,6 +75,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] Vector2Int[] m_foodCoor;
 
     private int m_foodConsumed;
+    private Character m_character;
     private TileInfo[,] m_tilemapData;
     private AchievePoint m_achievePoint;
 
@@ -187,14 +188,25 @@ public class MapManager : MonoBehaviour
     private void InitializeCharacter()
     {
         var worldPos = GetWorlPositionFromCoordiante(m_spawnPoint);
-        var character = Instantiate(m_characterPrefab, worldPos, Quaternion.identity);
+        m_character = Instantiate(m_characterPrefab, worldPos, Quaternion.identity);
+        m_character.IsPause = true;
 
-        CameraController.Instance.AssignFollowingTarget(character.transform);
+        CameraController.Instance.FadingCameraScreen(isFadeOut: true);
+        CameraController.Instance.AssignFollowingTarget(m_character.transform, 2f, () => m_character.IsPause = false);
     }
     private void InitializeAchivePoint()
     {
         var worldPos = GetWorlPositionFromCoordiante(m_achivePointCoor);
         m_achievePoint = Instantiate(m_achievePointPrefab, worldPos, Quaternion.identity);
+    }
+
+    private IEnumerator IE_ViewingAchievePointUnlock()
+    {
+        m_character.IsPause = true;
+
+        yield return new WaitForSeconds(1f);
+
+        CameraController.Instance.AssignFollowingTarget(m_character.transform, 1f, () => m_character.IsPause = false);
     }
 
     public void ConsumedFood(Vector3 worldPos)
@@ -206,6 +218,11 @@ public class MapManager : MonoBehaviour
         if (m_foodConsumed >= m_foodCoor.Length)
         {
             m_achievePoint.ActivePoint();
+            CameraController.Instance.FocusOnTarget(m_achievePoint.transform.position, 
+                                                    CameraController.State.ZoomOut,
+                                                    1f,
+                                                    () => StartCoroutine(IE_ViewingAchievePointUnlock())
+                                                    );
         }
     }
 
