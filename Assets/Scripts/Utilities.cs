@@ -71,5 +71,11 @@ public class Utilities : MonoBehaviour
         obj.localScale = end;
         callbacks?.Invoke();
     }
+    public static IEnumerator IE_DelayForAction(float delay, Action action)
+    {
+        yield return new WaitForSeconds(delay);
+
+        action.Invoke();
+    }
     #endregion
 }

@@ -28,13 +28,19 @@ public class Fork : Obstacle
     public void ShowFork()
     {
         m_animator.SetTrigger("Show");
-        m_collider.isTrigger = false;
-        m_isShow = true;
+        StartCoroutine(Utilities.IE_DelayForAction(0.5f, () =>
+        {
+            m_collider.isTrigger = false;
+            m_isShow = true;
+        }));
     }
     public void HideFork()
     {
         m_animator.SetTrigger("Hide");
-        m_collider.isTrigger = true;
-        m_isShow = false;
+        StartCoroutine(Utilities.IE_DelayForAction(0.5f, () =>
+        {
+            m_collider.isTrigger = true;
+            m_isShow = false;
+        }));
     }
 }

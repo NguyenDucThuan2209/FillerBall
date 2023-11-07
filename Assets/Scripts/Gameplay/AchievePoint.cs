@@ -12,4 +12,8 @@ public class AchievePoint : MonoBehaviour
         m_collider.isTrigger = false;
         m_star.gameObject.SetActive(true);
     }
+    public void AchievedPoint()
+    {
+
+    }
 }

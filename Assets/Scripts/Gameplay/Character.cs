@@ -26,7 +26,7 @@ public class Character : MonoBehaviour
         if (collision.transform.TryGetComponent(out AchievePoint achievePoint))
         {
             Debug.LogWarning($"OnCollisionEnter2D: {achievePoint.name}");
-
+            achievePoint.AchievedPoint();
         }
         if (collision.transform.TryGetComponent(out Obstacle obstacle))
         {
@@ -36,7 +36,15 @@ public class Character : MonoBehaviour
         if (collision.transform.TryGetComponent(out Food food))
         {
             Debug.LogWarning($"OnCollisionEnter2D: {food.name}");
-            OnFoodHit(food);
+            food.OnFoodConsumed();
+        }
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.transform.TryGetComponent(out Obstacle obstacle))
+        {
+            Debug.LogWarning($"OnCollisionEnter2D: {obstacle.name}");
+            OnObstacleHit();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -211,9 +219,5 @@ public class Character : MonoBehaviour
         m_animator.SetFloat("Y_Direction", 0);
 
         StartCoroutine(Respawn());
-    }
-    private void OnFoodHit(Food food)
-    {
-        food.OnFoodConsumed();
     }
 }
