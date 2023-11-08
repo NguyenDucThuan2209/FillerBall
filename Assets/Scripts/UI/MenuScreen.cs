@@ -12,7 +12,7 @@ public class MenuScreen : UIScreen
     {
         SoundManager.Instance?.PlaySound("Click");
 
-        MenuManager.Instance.StartGame();
+        ScreenManager.Instance.StartGame();
     }
     public void OnSoundButtonPressed()
     {

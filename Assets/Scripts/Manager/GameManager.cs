@@ -44,10 +44,13 @@ public class GameManager : MonoBehaviour
     {
     }
 
-
     public void StartGame()
     {
         ResetGameData();
+    }
+    public void StartLobby()
+    {
+
     }
     public void RestartGame()
     {
@@ -59,7 +62,7 @@ public class GameManager : MonoBehaviour
 
         ResetGameData();
         m_state = GameState.End;
-        MenuManager.Instance.EndGame();
+        ScreenManager.Instance.EndGame();
     }
     public void NextLevel()
     {
@@ -68,6 +71,6 @@ public class GameManager : MonoBehaviour
 
     public Vector2 GetJoystickInput()
     {
-        return MenuManager.Instance.GetUIJoystickInput();
+        return ScreenManager.Instance.GetUIJoystickInput();
     }
 }

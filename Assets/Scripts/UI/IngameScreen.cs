@@ -6,22 +6,15 @@ using UnityEngine.UI;
 public class IngameScreen : UIScreen
 {
     [SerializeField] Text m_levelText;
+    [SerializeField] Image m_starImage;
+    [SerializeField] Image[] m_starImagesList;
 
-    public void OnMenuButtonPressed()
+    public void OnPauseButtonPressed()
     {
-        SoundManager.Instance.PlaySound("Click");
-
-        MenuManager.Instance.BackToHome();
+        SoundManager.Instance?.PlaySound("Click");
     }
-    public void OnRestartButtonPressed()
+    public void OnAchieveStar()
     {
-        SoundManager.Instance.PlaySound("Click");
 
-        MenuManager.Instance.RestartGame();
-    }
-
-    public void SetLevelText(int level)
-    {
-        m_levelText.text = level.ToString();
     }
 }
