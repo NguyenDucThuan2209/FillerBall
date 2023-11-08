@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class CharacterGameplay : MonoBehaviour
 {
     [SerializeField] float m_speed = 1f;
     [SerializeField] Animator m_animator;

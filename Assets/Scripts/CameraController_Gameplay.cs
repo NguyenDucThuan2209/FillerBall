@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CameraController : MonoBehaviour
+public class CameraController_Gameplay : MonoBehaviour
 {
     public enum State
     {
         ZoomIn = 5,
         ZoomOut = 15
     }
-    private static CameraController m_instance;
-    public static CameraController Instance => m_instance;
+    private static CameraController_Gameplay m_instance;
+    public static CameraController_Gameplay Instance => m_instance;
 
     [SerializeField] Camera m_camera;
     [SerializeField] Image m_fadePanel;
@@ -20,7 +20,6 @@ public class CameraController : MonoBehaviour
     [SerializeField] float m_zoomInRatio = 5f;
     [SerializeField] float m_zoomOutRatio = 15f;
 
-    private State m_currentState;
     private bool m_isFollowingTarget;
     private Transform m_followingTarget;
 

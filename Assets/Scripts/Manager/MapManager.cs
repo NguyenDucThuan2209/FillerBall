@@ -66,7 +66,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] Fork m_forkPrefab;
     [SerializeField] Knife m_knifePrefab;
     [SerializeField] Tilemap m_tileBoundary;
-    [SerializeField] Character m_characterPrefab;
+    [SerializeField] CharacterGameplay m_characterPrefab;
     [SerializeField] AchievePoint m_achievePointPrefab;
     [Space]
     [SerializeField] Tilemap[] m_tileList;
@@ -75,7 +75,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] Vector2Int[] m_foodCoor;
 
     private int m_foodConsumed;
-    private Character m_character;
+    private CharacterGameplay m_character;
     private TileInfo[,] m_tilemapData;
     private AchievePoint m_achievePoint;
 
@@ -191,8 +191,8 @@ public class MapManager : MonoBehaviour
         m_character = Instantiate(m_characterPrefab, worldPos, Quaternion.identity);
         m_character.IsPause = true;
 
-        CameraController.Instance.FadingCameraScreen(isFadeOut: true);
-        CameraController.Instance.AssignFollowingTarget(m_character.transform, 2f, () => m_character.IsPause = false);
+        CameraController_Gameplay.Instance.FadingCameraScreen(isFadeOut: true);
+        CameraController_Gameplay.Instance.AssignFollowingTarget(m_character.transform, 2f, () => m_character.IsPause = false);
     }
     private void InitializeAchivePoint()
     {
@@ -206,7 +206,7 @@ public class MapManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        CameraController.Instance.AssignFollowingTarget(m_character.transform, 1f, () => m_character.IsPause = false);
+        CameraController_Gameplay.Instance.AssignFollowingTarget(m_character.transform, 1f, () => m_character.IsPause = false);
     }
 
     public void ConsumedFood(Vector3 worldPos)
@@ -218,8 +218,8 @@ public class MapManager : MonoBehaviour
         if (m_foodConsumed >= m_foodCoor.Length)
         {
             m_achievePoint.ActivePoint();
-            CameraController.Instance.FocusOnTarget(m_achievePoint.transform.position, 
-                                                    CameraController.State.ZoomOut,
+            CameraController_Gameplay.Instance.FocusOnTarget(m_achievePoint.transform.position, 
+                                                    CameraController_Gameplay.State.ZoomOut,
                                                     1f,
                                                     () => StartCoroutine(IE_ViewingAchievePointUnlock())
                                                     );
