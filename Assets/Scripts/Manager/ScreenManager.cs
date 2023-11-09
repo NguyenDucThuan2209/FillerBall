@@ -20,6 +20,8 @@ public class ScreenManager : MonoBehaviour
 
     [SerializeField] UIScreen[] m_uiScreens;
 
+    private Screen m_screenBeforePause;
+
     private void Awake()
     {
         if (m_instance != null)
@@ -48,16 +50,46 @@ public class ScreenManager : MonoBehaviour
         }
     }
 
+    public void ShowSkin()
+    {
+        HideAllScreen();
+        ShowScreen(Screen.Skin);
+    }
+    public void SelectSkin(bool isSkinVietNam)
+    {
+        HideAllScreen();
+        ShowScreen(Screen.Menu);
+        GameManager.Instance.SetSkin(isSkinVietNam);
+    }
+
     public void StartGame()
     {
         HideAllScreen();
         ShowScreen(Screen.Lobby);
         GameManager.Instance.StartLobby();
     }
+    public void PauseGame(Screen screen)
+    {
+        m_screenBeforePause = screen;
+
+        HideAllScreen();
+        ShowScreen(Screen.Pause);
+        GameManager.Instance.PauseGame();
+    }
+    public void ResumeGame()
+    {
+        HideAllScreen();
+        ShowScreen(m_screenBeforePause);
+        GameManager.Instance.ResumeGame();
+    }
     public void RestartGame()
     {
         HideAllScreen();
         GameManager.Instance.RestartGame();
+    }
+    public void NextGame()
+    {
+
     }
     public void EndGame()
     {
@@ -67,6 +99,7 @@ public class ScreenManager : MonoBehaviour
     public void BackToHome()
     {
         HideAllScreen();
+        ShowScreen(Screen.Menu);
         GameManager.Instance.EndGame();
     }
     

@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameState m_state;
 
     private int m_levelIndex = 0;
-    
+    private bool m_isSkinVietnam = true;
 
     public GameState State => m_state;
 
@@ -49,6 +49,18 @@ public class GameManager : MonoBehaviour
         ResetGameData();
     }
     public void StartLobby()
+    {
+
+    }
+    public void SetSkin(bool isSkinVietnam)
+    {
+        m_isSkinVietnam = isSkinVietnam;
+    }
+    public void PauseGame()
+    {
+
+    }
+    public void ResumeGame()
     {
 
     }

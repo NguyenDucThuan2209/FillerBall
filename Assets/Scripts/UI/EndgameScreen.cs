@@ -10,9 +10,13 @@ public class EndgameScreen : UIScreen
     public void OnMenuButtonPressed()
     {
         SoundManager.Instance?.PlaySound("Click");
+
+        ScreenManager.Instance.BackToHome();
     }
     public void OnContinueButtonPressed()
     {
         SoundManager.Instance?.PlaySound("Click");
+
+        ScreenManager.Instance.NextGame();
     }
 }
