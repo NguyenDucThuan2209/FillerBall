@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AchievePoint : MonoBehaviour
+public class AchievePoint_Gameplay : MonoBehaviour
 {
     [SerializeField] GameObject m_star;
     [SerializeField] Collider2D m_collider;

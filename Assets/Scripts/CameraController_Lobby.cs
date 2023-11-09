@@ -11,6 +11,10 @@ public class CameraController_Lobby : MonoBehaviour
     [SerializeField] Camera m_camera;
     [SerializeField] Transform m_followingTarget;
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+    }
     private void Update()
     {
         var currentFramePos = Vector3.Lerp(transform.position, m_followingTarget.position + m_cameraOffset, m_followSpeed * Time.deltaTime);

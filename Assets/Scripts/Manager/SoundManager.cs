@@ -22,8 +22,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] Audio[] m_musicAudio;
     [SerializeField] Audio[] m_soundAudio;
 
-    public bool MusicState => m_musicSource.mute;
-    public bool SoundState => m_soundSource.mute;
+    public bool MusicState => !m_musicSource.mute;
+    public bool SoundState => !m_soundSource.mute;
 
     private void Awake()
     {

@@ -67,7 +67,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] Knife m_knifePrefab;
     [SerializeField] Tilemap m_tileBoundary;
     [SerializeField] CharacterGameplay m_characterPrefab;
-    [SerializeField] AchievePoint m_achievePointPrefab;
+    [SerializeField] AchievePoint_Gameplay m_achievePointPrefab;
     [Space]
     [SerializeField] Tilemap[] m_tileList;
     [SerializeField] ForkData[] m_forkList;
@@ -77,7 +77,7 @@ public class MapManager : MonoBehaviour
     private int m_foodConsumed;
     private CharacterGameplay m_character;
     private TileInfo[,] m_tilemapData;
-    private AchievePoint m_achievePoint;
+    private AchievePoint_Gameplay m_achievePoint;
 
     public Vector2Int SpawnPoint => m_spawnPoint;
 

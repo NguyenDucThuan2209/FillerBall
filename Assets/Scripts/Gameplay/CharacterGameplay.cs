@@ -23,7 +23,7 @@ public class CharacterGameplay : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.TryGetComponent(out AchievePoint achievePoint))
+        if (collision.transform.TryGetComponent(out AchievePoint_Gameplay achievePoint))
         {
             Debug.LogWarning($"OnCollisionEnter2D: {achievePoint.name}");
             achievePoint.AchievedPoint();

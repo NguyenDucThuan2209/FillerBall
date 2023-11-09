@@ -5,9 +5,9 @@ using UnityEngine;
 public enum GameState
 {
     None,
-    Initializing,
-    Playing,
-    Pausing,
+    Lobby,
+    Gameplay,
+    Pause,
     End
 }
 
@@ -18,6 +18,22 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Properties")]
     [SerializeField] GameState m_state;
+
+    [Header("LOBBY")]
+    [Header("Properties")]
+    [SerializeField] RuntimeAnimatorController[] m_lobbySkinAnimators;
+    [Header("References")]
+    [SerializeField] GameObject m_lobby;
+    [SerializeField] CharacterLobby m_characterLobby;
+    [SerializeField] CameraController_Lobby m_cameraLobby;
+
+    public RuntimeAnimatorController CurrentSkin => m_lobbySkinAnimators[m_isSkinVietnam ? 0 : 1];
+    public RuntimeAnimatorController LobbySkin(bool isSkinVietNam) => m_lobbySkinAnimators[isSkinVietNam ? 0 : 1];
+
+    [Header("GAMEPLAY")]
+    [SerializeField] GameObject m_gameplay;
+    [SerializeField] CharacterGameplay m_characterGameplay;
+    [SerializeField] CameraController_Gameplay m_cameraGameplay;
 
     private int m_levelIndex = 0;
     private bool m_isSkinVietnam = true;
@@ -34,11 +50,6 @@ public class GameManager : MonoBehaviour
 
         m_instance = this;
     }
-    private void Update()
-    {
-        if (m_state != GameState.Playing) return;
-
-    }
 
     private void ResetGameData()
     {
@@ -50,7 +61,10 @@ public class GameManager : MonoBehaviour
     }
     public void StartLobby()
     {
+        m_lobby.SetActive(true);
+        m_gameplay.SetActive(false);
 
+        m_characterLobby.Animator.runtimeAnimatorController = CurrentSkin;
     }
     public void SetSkin(bool isSkinVietnam)
     {
