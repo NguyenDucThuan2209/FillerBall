@@ -23,6 +23,8 @@ public class CameraController_Gameplay : MonoBehaviour
     private bool m_isFollowingTarget;
     private Transform m_followingTarget;
 
+    public Camera Camera => m_camera;
+
     private void Awake()
     {
         if (m_instance != null)
@@ -58,6 +60,8 @@ public class CameraController_Gameplay : MonoBehaviour
     }
     private IEnumerator IE_FadingCamera(bool isFadeOut, float duration, System.Action callback = null)
     {
+        m_fadePanel.gameObject.SetActive(true);
+
         float t = 0;
         while (t < duration)
         {
@@ -66,7 +70,9 @@ public class CameraController_Gameplay : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
+
         callback?.Invoke();
+        m_fadePanel.gameObject.SetActive(false);
     }
 
     public void FocusOnTarget(Vector3 target, State state, float duration = 1f, System.Action callback = null)

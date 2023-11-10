@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class MenuScreen : UIScreen
 {
+    [SerializeField] RectTransform[] m_leftButtons;
+    [SerializeField] RectTransform[] m_rightButtons;
     [SerializeField] Slider m_soundSlider;
     [SerializeField] Slider m_musicSlider;
 
@@ -14,13 +16,28 @@ public class MenuScreen : UIScreen
 
         m_soundSlider.value = SoundManager.Instance.SoundState ? 1 : 0;
         m_musicSlider.value = SoundManager.Instance.MusicState ? 1 : 0;
+
+        foreach (var button in m_leftButtons)
+        {
+            StartCoroutine(Utilities.IE_AnchorTranslate(button,
+                                                        new Vector3(-1000f, button.anchoredPosition.y),
+                                                        button.anchoredPosition,
+                                                        0.25f));
+        }
+        foreach (var button in m_rightButtons)
+        {
+            StartCoroutine(Utilities.IE_AnchorTranslate(button,
+                                                        new Vector3(1000f, button.anchoredPosition.y),
+                                                        button.anchoredPosition,
+                                                        0.25f));
+        }
     }
 
     public void OnStartGameButtonPressed()
     {
         SoundManager.Instance?.PlaySound("Click");
 
-        ScreenManager.Instance.StartGame();
+        ScreenManager.Instance.StartLobby();
     }
     public void OnSoundButtonPressed()
     {

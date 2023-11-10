@@ -31,7 +31,12 @@ public class ScreenManager : MonoBehaviour
         }
         m_instance = this;
     }
-    
+    private void Start()
+    {
+        HideAllScreen();
+        ShowScreen(Screen.Menu);
+    }
+
     private void HideAllScreen()
     {
         foreach (var screen in m_uiScreens)
@@ -63,7 +68,13 @@ public class ScreenManager : MonoBehaviour
         GameManager.Instance.SetSkin(isSkinVietNam);
     }
 
-    public void StartGame()
+    public void StartGame(Map map, int level)
+    {
+        HideAllScreen();
+        ShowScreen(Screen.Ingame);
+        GameManager.Instance.StartGame(map, level);
+    }
+    public void StartLobby()
     {
         HideAllScreen();
         ShowScreen(Screen.Lobby);
@@ -90,11 +101,11 @@ public class ScreenManager : MonoBehaviour
     }
     public void NextGame()
     {
-
     }
-    public void EndGame()
+    public void EndGame(int starAmount)
     {
-        
+        EndgameScreen endgame = (EndgameScreen)m_uiScreens[(byte)Screen.Endgame];
+        endgame.ShowScreen(starAmount);
     }
 
     public void BackToHome()
@@ -117,6 +128,15 @@ public class ScreenManager : MonoBehaviour
     public void SelectLobbyInfo(Map map, int level)
     {
         LobbyManager.Instance.OnCharacterSelectPoint(map, level);
+    }
+    public void CollectStar(Vector3 screenPoint)
+    {
+        IngameScreen ingame = (IngameScreen)m_uiScreens[(byte)Screen.Ingame];
+        ingame.OnAchieveStar(screenPoint);
+    }
+    public int GetCurrentStar()
+    {
+        return GameManager.Instance.CurrentStar;
     }
     public Vector2 GetUIJoystickInput()
     {

@@ -49,9 +49,6 @@ internal struct ForkData
 
 public class MapManager : MonoBehaviour
 {
-    private static MapManager m_instance;
-    public static MapManager Instance => m_instance;
-
     [SerializeField] bool m_isShowCoordinates = true;
     [Space]
     [SerializeField] Food.Type m_mapFood;
@@ -66,7 +63,6 @@ public class MapManager : MonoBehaviour
     [SerializeField] Fork m_forkPrefab;
     [SerializeField] Knife m_knifePrefab;
     [SerializeField] Tilemap m_tileBoundary;
-    [SerializeField] CharacterGameplay m_characterPrefab;
     [SerializeField] AchievePoint_Gameplay m_achievePointPrefab;
     [Space]
     [SerializeField] Tilemap[] m_tileList;
@@ -83,12 +79,6 @@ public class MapManager : MonoBehaviour
 
     private void Awake()
     {
-        if (m_instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        m_instance = this;
     }
     private void Start()
     {
@@ -116,7 +106,7 @@ public class MapManager : MonoBehaviour
             {
                 var text = $"{i}, {j}";
                 var worldPos = GetWorlPositionFromCoordiante(new Vector2Int(i, j));
-                Gizmos.DrawCube(worldPos, Vector3.one * 0.95f);
+                Gizmos.DrawCube(worldPos + new Vector3(0f, 0f, 1f), Vector3.one * 0.95f);
                 Handles.Label(worldPos, text, style);
             }
         }
@@ -162,7 +152,7 @@ public class MapManager : MonoBehaviour
         {
             var worldPos = GetWorlPositionFromCoordiante(m_foodCoor[i]);
             var food = Instantiate(m_foodPrefab, worldPos, Quaternion.identity);
-            food.Initialize(m_mapFood);
+            food.Initialize(m_mapFood, this);
         }
     }
     private void InitializeFork()
@@ -170,7 +160,7 @@ public class MapManager : MonoBehaviour
         for (int i = 0; i < m_forkList.Length; i++)
         {
             var worldPos = GetWorlPositionFromCoordiante(m_forkList[i].Coordinate);
-            var fork = Instantiate(m_forkPrefab, worldPos, Quaternion.identity);
+            var fork = Instantiate(m_forkPrefab, worldPos, Quaternion.identity, transform);
             fork.transform.eulerAngles = m_forkList[i].Rotation;
         }
     }
@@ -180,7 +170,7 @@ public class MapManager : MonoBehaviour
         {
             var worldPosStart = GetWorlPositionFromCoordiante(m_knifeList[i].StartPoint);
             var worldPosEnd = GetWorlPositionFromCoordiante(m_knifeList[i].EndPoint);
-            var knife = Instantiate(m_knifePrefab);
+            var knife = Instantiate(m_knifePrefab, transform);
 
             knife.Initialize(worldPosStart, worldPosEnd);
         }
@@ -188,7 +178,8 @@ public class MapManager : MonoBehaviour
     private void InitializeCharacter()
     {
         var worldPos = GetWorlPositionFromCoordiante(m_spawnPoint);
-        m_character = Instantiate(m_characterPrefab, worldPos, Quaternion.identity);
+        m_character.transform.position = worldPos;
+        m_character.MapManager = this;
         m_character.IsPause = true;
 
         CameraController_Gameplay.Instance.FadingCameraScreen(isFadeOut: true);
@@ -202,37 +193,43 @@ public class MapManager : MonoBehaviour
 
     private IEnumerator IE_ViewingAchievePointUnlock()
     {
-        m_character.IsPause = true;
+        yield return new WaitForSeconds(2f);
 
-        yield return new WaitForSeconds(1f);
-
-        CameraController_Gameplay.Instance.AssignFollowingTarget(m_character.transform, 1f, () => m_character.IsPause = false);
+        CameraController_Gameplay.Instance.AssignFollowingTarget(m_character.transform, 1f, () =>
+        {
+            m_character.IsPause = false;
+            GameManager.Instance.ResumeGame();
+        });
     }
 
+    public void Initialize(CharacterGameplay character)
+    {
+        m_character = character;
+    }
     public void ConsumedFood(Vector3 worldPos)
     {
         var star = Instantiate(m_starPrefab, worldPos, Quaternion.identity);
+
+        star.OnBeforeDestroyCallback += () => GameManager.Instance.CollectStar(worldPos);
         star.IsDestroy = true;
         m_foodConsumed++;
 
         if (m_foodConsumed >= m_foodCoor.Length)
         {
+            m_character.IsPause = true;
             m_achievePoint.ActivePoint();
+            GameManager.Instance.PauseGame();
             CameraController_Gameplay.Instance.FocusOnTarget(m_achievePoint.transform.position, 
                                                     CameraController_Gameplay.State.ZoomOut,
-                                                    1f,
-                                                    () => StartCoroutine(IE_ViewingAchievePointUnlock())
+                                                    0.5f,
+                                                    () =>
+                                                    {
+                                                        StartCoroutine(IE_ViewingAchievePointUnlock());
+                                                    }
                                                     );
         }
     }
 
-    public Vector3 GetWorlPositionFromCoordiante(Vector2Int coor)
-    {
-        var worldPos = new Vector3(coor.x * m_tileSize.x + m_tileOffset.x,
-                                   coor.y * m_tileSize.y + m_tileOffset.y,
-                                   0);
-        return worldPos;
-    }
     public Vector2Int GetTargetCoordinate(Vector2Int start, Vector2Int diff)
     {
         var pos = start + diff;
@@ -265,6 +262,13 @@ public class MapManager : MonoBehaviour
         var coor = GetTargetCoordinate(start, diff);
         var worldPos = GetWorlPositionFromCoordiante(coor);
 
+        return worldPos;
+    }
+    public Vector3 GetWorlPositionFromCoordiante(Vector2Int coor)
+    {
+        var worldPos = new Vector3(coor.x * m_tileSize.x + m_tileOffset.x,
+                                   coor.y * m_tileSize.y + m_tileOffset.y,
+                                   0);
         return worldPos;
     }
     public Vector3 GetSpawnWorldPos()

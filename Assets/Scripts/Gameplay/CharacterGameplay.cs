@@ -8,6 +8,8 @@ public class CharacterGameplay : MonoBehaviour
     [SerializeField] Animator m_animator;
     [SerializeField] Vector2Int m_currentCoordiante;
 
+    private MapManager m_mapManager;
+
     private Vector2Int m_currentDirection;
     private Coroutine m_movementCoroutine;
     private Vector2 m_startPosition;
@@ -20,22 +22,24 @@ public class CharacterGameplay : MonoBehaviour
         get => m_isPause;
         set => m_isPause = value;
     }
+    public MapManager MapManager
+    {
+        get => m_mapManager;
+        set => m_mapManager = value;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.TryGetComponent(out AchievePoint_Gameplay achievePoint))
         {
-            Debug.LogWarning($"OnCollisionEnter2D: {achievePoint.name}");
             achievePoint.AchievedPoint();
         }
         if (collision.transform.TryGetComponent(out Obstacle obstacle))
         {
-            Debug.LogWarning($"OnCollisionEnter2D: {obstacle.name}");
             OnObstacleHit();
         }
         if (collision.transform.TryGetComponent(out Food food))
         {
-            Debug.LogWarning($"OnCollisionEnter2D: {food.name}");
             food.OnFoodConsumed();
         }
     }
@@ -43,7 +47,6 @@ public class CharacterGameplay : MonoBehaviour
     {
         if (collision.transform.TryGetComponent(out Obstacle obstacle))
         {
-            Debug.LogWarning($"OnCollisionEnter2D: {obstacle.name}");
             OnObstacleHit();
         }
     }
@@ -51,7 +54,6 @@ public class CharacterGameplay : MonoBehaviour
     {
         if (collision.transform.TryGetComponent(out Fork fork))
         {
-            Debug.LogWarning($"OnTriggerEnter2D: {fork.name}");
             fork.ShowFork();
         }
     }
@@ -61,6 +63,7 @@ public class CharacterGameplay : MonoBehaviour
     }
     private void Update()
     {
+        if (GameManager.Instance.State != GameState.Gameplay) return;
         if (m_isSliding || m_isPause) return;
 
         m_currentDirection = Vector2Int.zero;
@@ -85,11 +88,11 @@ public class CharacterGameplay : MonoBehaviour
                     // Move to the right square
                     m_currentDirection = new Vector2Int(1, 0);
 
-                    var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
+                    var targetCoor = m_mapManager.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
                     if (targetCoor != m_currentCoordiante)
                     {
                         m_isSliding = true;
-                        var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
+                        var targetPos = m_mapManager.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
                         m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
                                                                                          transform.position,
                                                                                          targetPos,
@@ -111,11 +114,11 @@ public class CharacterGameplay : MonoBehaviour
                     // Move to the left square
                     m_currentDirection = new Vector2Int(-1, 0);
 
-                    var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
+                    var targetCoor = m_mapManager.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
                     if (targetCoor != m_currentCoordiante)
                     {
                         m_isSliding = true;
-                        var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
+                        var targetPos = m_mapManager.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
                         m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
                                                                                         transform.position,
                                                                                         targetPos,
@@ -141,11 +144,11 @@ public class CharacterGameplay : MonoBehaviour
                     // Move to upper square
                     m_currentDirection = new Vector2Int(0, 1);
 
-                    var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
+                    var targetCoor = m_mapManager.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
                     if (targetCoor != m_currentCoordiante)
                     {
                         m_isSliding = true;
-                        var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
+                        var targetPos = m_mapManager.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
                         m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
                                                                                          transform.position,
                                                                                          targetPos,
@@ -167,11 +170,11 @@ public class CharacterGameplay : MonoBehaviour
                     // Move to lower square
                     m_currentDirection = new Vector2Int(0, -1);
                     
-                    var targetCoor = MapManager.Instance.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
+                    var targetCoor = m_mapManager.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
                     if (targetCoor != m_currentCoordiante)
                     {
                         m_isSliding = true;
-                        var targetPos = MapManager.Instance.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
+                        var targetPos = m_mapManager.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
                         m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
                                                                                          transform.position,
                                                                                          targetPos,
@@ -201,8 +204,8 @@ public class CharacterGameplay : MonoBehaviour
 
         m_isSliding = false;
         m_currentDirection = Vector2Int.zero;
-        m_currentCoordiante = MapManager.Instance.SpawnPoint;
-        transform.position = MapManager.Instance.GetSpawnWorldPos();
+        m_currentCoordiante = m_mapManager.SpawnPoint;
+        transform.position = m_mapManager.GetSpawnWorldPos();
 
         m_animator.SetTrigger("Respawn");
         m_animator.SetFloat("X_Direction", m_currentDirection.x);

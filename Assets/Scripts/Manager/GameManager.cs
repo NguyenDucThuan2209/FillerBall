@@ -11,6 +11,17 @@ public enum GameState
     End
 }
 
+[System.Serializable]
+internal struct MapData
+{
+    [SerializeField] string m_name;
+    [SerializeField] Map m_map;
+    [SerializeField] MapManager[] m_mapLevels;
+
+    public Map Map => m_map;
+    public MapManager[] MapLevels => m_mapLevels;
+}
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager m_instance;
@@ -31,14 +42,21 @@ public class GameManager : MonoBehaviour
     public RuntimeAnimatorController LobbySkin(bool isSkinVietNam) => m_lobbySkinAnimators[isSkinVietNam ? 0 : 1];
 
     [Header("GAMEPLAY")]
+    [Header("Properties")]
+    [SerializeField] MapData[] m_mapDatas;
+    [Header("References")]
     [SerializeField] GameObject m_gameplay;
     [SerializeField] CharacterGameplay m_characterGameplay;
     [SerializeField] CameraController_Gameplay m_cameraGameplay;
 
-    private int m_levelIndex = 0;
+    private int m_currentStar;
+    private GameState m_lastGameState;
     private bool m_isSkinVietnam = true;
 
+    private MapManager m_mapManager;
+
     public GameState State => m_state;
+    public int CurrentStar => m_currentStar;
 
     private void Awake()
     {
@@ -57,13 +75,32 @@ public class GameManager : MonoBehaviour
 
     public void StartGame(Map map, int level)
     {
-        
+        m_lobby.SetActive(false);
+        m_gameplay.SetActive(true);
+        m_state = GameState.Gameplay;
+
+        if (m_mapManager != null)
+        {
+            Destroy(m_mapManager.gameObject);
+        }
+        foreach (var mapData in m_mapDatas)
+        {
+            if (mapData.Map == map)
+            {
+                m_mapManager = Instantiate(mapData.MapLevels[level], m_gameplay.transform);
+                m_mapManager.Initialize(m_characterGameplay);
+                break;
+            }
+        }
     }
     public void StartLobby()
     {
+        m_state = GameState.Lobby;
+
         m_lobby.SetActive(true);
         m_gameplay.SetActive(false);
 
+        LobbyManager.Instance.OnStartLobby();
         m_characterLobby.Animator.runtimeAnimatorController = CurrentSkin;
     }
     public void SetSkin(bool isSkinVietnam)
@@ -72,11 +109,12 @@ public class GameManager : MonoBehaviour
     }
     public void PauseGame()
     {
-
+        m_lastGameState = m_state;
+        m_state = GameState.Pause;
     }
     public void ResumeGame()
     {
-
+        m_state = m_lastGameState;
     }
     public void RestartGame()
     {
@@ -88,6 +126,7 @@ public class GameManager : MonoBehaviour
 
         ResetGameData();
         m_state = GameState.End;
+        ScreenManager.Instance.EndGame(m_currentStar);
     }
     public void ExitGame()
     {
@@ -98,6 +137,14 @@ public class GameManager : MonoBehaviour
         ResetGameData();
     }
 
+
+    public void CollectStar(Vector3 worldPos)
+    {
+        m_currentStar++;
+
+        var screenPoint = m_cameraGameplay.Camera.WorldToScreenPoint(worldPos);
+        ScreenManager.Instance.CollectStar(screenPoint);
+    }
     public Vector2 GetJoystickInput()
     {
         return ScreenManager.Instance.GetUIJoystickInput();

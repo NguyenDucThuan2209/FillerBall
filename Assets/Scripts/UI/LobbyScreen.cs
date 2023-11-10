@@ -18,8 +18,10 @@ public class LobbyScreen : UIScreen
     {
         m_infoBoard.SetActive(true);
 
+        m_currentMap = map;
+        m_currentLevel = level;
         m_lobbyInfo.text = $"Map {map}" 
-                           + (level >= 0 ? $"\n Level {level}" : "");
+                           + (level >= 0 ? $"\nLevel {level + 1}" : "");
     }
     public void HideLobbyInfo(Map map, int level)
     {

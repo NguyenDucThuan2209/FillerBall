@@ -10,6 +10,8 @@ public class Knife : Obstacle
 
     private void Update()
     {
+        if (GameManager.Instance.State != GameState.Gameplay) return;
+
         float distance = Vector3.Distance(m_startPoint, m_endPoint);
         float duration = distance / m_speed;
 

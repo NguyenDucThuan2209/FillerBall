@@ -13,7 +13,6 @@ public class CharacterLobby : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.LogWarning("OnTriggerEnter2D: " + collision.transform.name);
         if (collision.TryGetComponent(out AchievePoint_Lobby achievePoint))
         {
             achievePoint.OnPlayerEnterPoint();
@@ -21,7 +20,6 @@ public class CharacterLobby : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.LogWarning("OnTriggerEnter2D: " + collision.transform.name);
         if (collision.TryGetComponent(out AchievePoint_Lobby achievePoint))
         {
             achievePoint.OnPlayerExitPoint();

@@ -12,6 +12,7 @@ public class Fork : Obstacle
     private float m_timeCount = 0f;
     private void Update()
     {
+        if (GameManager.Instance.State != GameState.Gameplay) return;
         if (!m_isShow) return;
 
         if (m_timeCount >= m_time)
@@ -27,12 +28,14 @@ public class Fork : Obstacle
 
     public void ShowFork()
     {
-        m_animator.SetTrigger("Show");
         StartCoroutine(Utilities.IE_DelayForAction(0.5f, () =>
         {
+            m_animator.SetTrigger("Show");
             m_collider.isTrigger = false;
             m_isShow = true;
-        }));
+        },
+        () => GameManager.Instance.State == GameState.Pause
+        ));
     }
     public void HideFork()
     {

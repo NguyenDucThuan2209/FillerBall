@@ -9,6 +9,7 @@ public class Star : MonoBehaviour
 
     private float m_timeCount;
 
+    public System.Action OnBeforeDestroyCallback;
     public bool IsDestroy
     {
         get => m_isDestroy;
@@ -21,6 +22,7 @@ public class Star : MonoBehaviour
 
         if (m_timeCount > m_existTime)
         {
+            OnBeforeDestroyCallback?.Invoke();
             Destroy(gameObject);
         }
         else

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class UIScreen : MonoBehaviour
 {
-    [SerializeField] Screen m_screenType;
-    [SerializeField] GameObject m_panel;
+    [SerializeField] protected Screen m_screenType;
+    [SerializeField] protected GameObject m_panel;
 
     public Screen Type => m_screenType;
 

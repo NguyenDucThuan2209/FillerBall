@@ -6,6 +6,19 @@ using UnityEngine;
 public class Utilities : MonoBehaviour
 {
     #region IEnumerator
+    public static IEnumerator IE_AnchorTranslate(RectTransform obj, Vector3 start, Vector3 end, float duration = 1f, Action callbacks = null)
+    {
+        float t = 0;
+        while (t < duration)
+        {
+            obj.anchoredPosition = Vector3.Lerp(start, end, t / duration);
+            t += Time.deltaTime;
+            yield return null;
+        }
+        Debug.Log($"IE_AnchorTranslate: start = {start}, end = {end}");
+        obj.anchoredPosition = end;
+        callbacks?.Invoke();
+    }
     public static IEnumerator IE_LocalTranslate(Transform obj, Vector3 start, Vector3 end, float duration, Action callbacks = null)
     {
         float t = 0;
@@ -71,8 +84,13 @@ public class Utilities : MonoBehaviour
         obj.localScale = end;
         callbacks?.Invoke();
     }
-    public static IEnumerator IE_DelayForAction(float delay, Action action)
+    public static IEnumerator IE_DelayForAction(float delay, Action action, Func<bool> additionCondition = null)
     {
+        yield return new WaitForEndOfFrame();
+        if (additionCondition != null)
+        {
+            yield return new WaitWhile(additionCondition);
+        }
         yield return new WaitForSeconds(delay);
 
         action.Invoke();

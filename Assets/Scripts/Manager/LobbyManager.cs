@@ -32,6 +32,20 @@ public class LobbyManager : MonoBehaviour
         m_instance = this;
     }
 
+    public void OnStartLobby()
+    {
+        m_airport.SetActive(true);
+        for (int i = 0; i < m_lobbyMaps.Length; i++)
+        {
+            m_lobbyMaps[i].SetActive(false);
+        }
+
+        var mapPosition = m_airport.transform.Find("SpawnPoint").position;
+        m_characterLobby.transform.position = mapPosition;
+        m_cameraController.FocusOnPoint(mapPosition);
+        m_cameraController.ZoomIntoMap();
+    }
+
     public void OnCharacterEnterPoint(Map map, int level)
     {
         ScreenManager.Instance.ShowLobbyInfo(map, level);
@@ -44,11 +58,20 @@ public class LobbyManager : MonoBehaviour
     {
         if (level >= 0)
         {
-
+            ScreenManager.Instance.StartGame(map, level);
         }
         else
         {
+            m_cameraController.TransitionToMap(map, () =>
+            {
+                m_airport.SetActive(false);
+                m_lobbyMaps[(byte)map].SetActive(true);
 
+                var mapPosition = m_lobbyMaps[(byte)map].transform.Find("SpawnPoint").position;
+                m_characterLobby.transform.position = mapPosition;
+                m_cameraController.FocusOnPoint(mapPosition);
+                m_cameraController.ZoomIntoMap();
+            });
         }
     }
 }

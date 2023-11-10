@@ -804,9 +804,9 @@ TextureImporter:
       name: Map_Hue_32
       rect:
         serializedVersion: 2
-        x: 3500
+        x: 4203
         y: 700
-        width: 700
+        width: 697
         height: 700
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -825,7 +825,7 @@ TextureImporter:
       name: Map_Hue_33
       rect:
         serializedVersion: 2
-        x: 4200
+        x: 3500
         y: 700
         width: 700
         height: 700
@@ -1035,7 +1035,7 @@ TextureImporter:
       name: Map_Hue_43
       rect:
         serializedVersion: 2
-        x: 5600
+        x: 4900
         y: 0
         width: 700
         height: 700
@@ -1048,6 +1048,27 @@ TextureImporter:
       bones: []
       spriteID: bc94973e660a5a6409182f6f548b56d7
       internalID: 974917124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_Hue_44
+      rect:
+        serializedVersion: 2
+        x: 5600
+        y: 0
+        width: 700
+        height: 700
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d60517b9eced35744a815cc3d62ddd84
+      internalID: 323469022
       vertices: []
       indices: 
       edges: []
@@ -1102,6 +1123,7 @@ TextureImporter:
       Map_Hue_41: 734786179
       Map_Hue_42: 1148217955
       Map_Hue_43: 974917124
+      Map_Hue_44: 323469022
       Map_Hue_5: -73451955
       Map_Hue_6: 211346391
       Map_Hue_7: 83317290

@@ -16,18 +16,21 @@ public class Food : MonoBehaviour
     [SerializeField] Type m_type;
     [SerializeField] Animator m_animator;
 
+    private MapManager m_mapManager;
+
     private void Start()
     {
         m_animator.SetInteger("Type", (int)m_type);
     }
 
-    public void Initialize(Type type)
+    public void Initialize(Type type, MapManager mapManager)
     {
         m_type = type;
+        m_mapManager = mapManager;
     }
     public void OnFoodConsumed()
     {
-        MapManager.Instance.ConsumedFood(transform.position);
+        m_mapManager.ConsumedFood(transform.position);
         Destroy(gameObject);
     }
 }
