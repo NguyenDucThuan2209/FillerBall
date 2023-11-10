@@ -29,7 +29,7 @@ public class MenuScreen : UIScreen
         bool isMute = m_soundSlider.value == 0;
 
         m_soundSlider.value = isMute ? 1 : 0;
-        SoundManager.Instance.SetSoundState(isMute);
+        SoundManager.Instance.SetSoundState(!isMute);
     }
     public void OnMusicButtonPressed()
     {
@@ -38,7 +38,7 @@ public class MenuScreen : UIScreen
         bool isMute = m_musicSlider.value == 0;
 
         m_musicSlider.value = isMute ? 1 : 0;
-        SoundManager.Instance.SetMusicState(isMute);
+        SoundManager.Instance.SetMusicState(!isMute);
     }
     public void OnSkinButtonPressed()
     {

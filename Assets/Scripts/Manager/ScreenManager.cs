@@ -46,6 +46,7 @@ public class ScreenManager : MonoBehaviour
             if (uiScreen.Type == screen)
             {
                 uiScreen.ShowScreen();
+                break;
             }
         }
     }
@@ -93,16 +94,30 @@ public class ScreenManager : MonoBehaviour
     }
     public void EndGame()
     {
-        HideAllScreen();
+        
     }
 
     public void BackToHome()
     {
         HideAllScreen();
         ShowScreen(Screen.Menu);
-        GameManager.Instance.EndGame();
+        GameManager.Instance.ExitGame();
     }
     
+    public void ShowLobbyInfo(Map map, int level)
+    {
+        LobbyScreen lobby = (LobbyScreen)m_uiScreens[(byte)Screen.Lobby];
+        lobby.ShowLobbyInfo(map, level);
+    }
+    public void HideLobbyInfo(Map map, int level)
+    {
+        LobbyScreen lobby = (LobbyScreen)m_uiScreens[(byte)Screen.Lobby];
+        lobby.HideLobbyInfo(map, level);
+    }
+    public void SelectLobbyInfo(Map map, int level)
+    {
+        LobbyManager.Instance.OnCharacterSelectPoint(map, level);
+    }
     public Vector2 GetUIJoystickInput()
     {
         LobbyScreen lobby = (LobbyScreen)m_uiScreens[(byte)Screen.Lobby];

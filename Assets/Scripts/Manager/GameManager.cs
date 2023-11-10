@@ -55,9 +55,9 @@ public class GameManager : MonoBehaviour
     {
     }
 
-    public void StartGame()
+    public void StartGame(Map map, int level)
     {
-        ResetGameData();
+        
     }
     public void StartLobby()
     {
@@ -88,7 +88,10 @@ public class GameManager : MonoBehaviour
 
         ResetGameData();
         m_state = GameState.End;
-        ScreenManager.Instance.EndGame();
+    }
+    public void ExitGame()
+    {
+        Debug.LogWarning("Exit Game");
     }
     public void NextLevel()
     {

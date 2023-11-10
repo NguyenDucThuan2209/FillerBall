@@ -2,14 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Map
-{
-    Hue,
-    Hanoi,
-    Seoul,
-    Jeju
-}
-
 public class CharacterLobby : MonoBehaviour
 {
     [SerializeField] Animator m_animator;
@@ -22,6 +14,18 @@ public class CharacterLobby : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.LogWarning("OnTriggerEnter2D: " + collision.transform.name);
+        if (collision.TryGetComponent(out AchievePoint_Lobby achievePoint))
+        {
+            achievePoint.OnPlayerEnterPoint();
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Debug.LogWarning("OnTriggerEnter2D: " + collision.transform.name);
+        if (collision.TryGetComponent(out AchievePoint_Lobby achievePoint))
+        {
+            achievePoint.OnPlayerExitPoint();
+        }
     }
     private void Update()
     {
