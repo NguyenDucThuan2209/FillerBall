@@ -151,7 +151,7 @@ public class MapManager : MonoBehaviour
         for (int i = 0; i < m_foodCoor.Length; i++)
         {
             var worldPos = GetWorlPositionFromCoordiante(m_foodCoor[i]);
-            var food = Instantiate(m_foodPrefab, worldPos, Quaternion.identity);
+            var food = Instantiate(m_foodPrefab, worldPos, Quaternion.identity, transform);
             food.Initialize(m_mapFood, this);
         }
     }
@@ -178,8 +178,7 @@ public class MapManager : MonoBehaviour
     private void InitializeCharacter()
     {
         var worldPos = GetWorlPositionFromCoordiante(m_spawnPoint);
-        m_character.transform.position = worldPos;
-        m_character.MapManager = this;
+        m_character.Initialize(this);
         m_character.IsPause = true;
 
         CameraController_Gameplay.Instance.FadingCameraScreen(isFadeOut: true);
@@ -188,7 +187,7 @@ public class MapManager : MonoBehaviour
     private void InitializeAchivePoint()
     {
         var worldPos = GetWorlPositionFromCoordiante(m_achivePointCoor);
-        m_achievePoint = Instantiate(m_achievePointPrefab, worldPos, Quaternion.identity);
+        m_achievePoint = Instantiate(m_achievePointPrefab, worldPos, Quaternion.identity, transform);
     }
 
     private IEnumerator IE_ViewingAchievePointUnlock()

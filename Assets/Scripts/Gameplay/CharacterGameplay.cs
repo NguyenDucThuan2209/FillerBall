@@ -14,7 +14,9 @@ public class CharacterGameplay : MonoBehaviour
     private Coroutine m_movementCoroutine;
     private Vector2 m_startPosition;
     private Vector2 m_endPosition;
+    [SerializeField]
     private bool m_isSliding;
+    [SerializeField]
     private bool m_isPause;
 
     public bool IsPause
@@ -59,7 +61,6 @@ public class CharacterGameplay : MonoBehaviour
     }
     private void Start()
     {
-        StartCoroutine(Respawn(0f));
     }
     private void Update()
     {
@@ -198,16 +199,17 @@ public class CharacterGameplay : MonoBehaviour
         m_animator.SetFloat("Y_Direction", m_currentDirection.y);
     }
 
-    private IEnumerator Respawn(float delay = 1f)
+    private IEnumerator EndGame(float delay = 1f)
     {
         yield return new WaitForSeconds(delay);
+
+        GameManager.Instance.EndGame();
 
         m_isSliding = false;
         m_currentDirection = Vector2Int.zero;
         m_currentCoordiante = m_mapManager.SpawnPoint;
         transform.position = m_mapManager.GetSpawnWorldPos();
 
-        m_animator.SetTrigger("Respawn");
         m_animator.SetFloat("X_Direction", m_currentDirection.x);
         m_animator.SetFloat("Y_Direction", m_currentDirection.y);
     }
@@ -221,6 +223,14 @@ public class CharacterGameplay : MonoBehaviour
         m_animator.SetFloat("X_Direction", 0);
         m_animator.SetFloat("Y_Direction", 0);
 
-        StartCoroutine(Respawn());
+        StartCoroutine(EndGame());
+    }
+
+    public void Initialize(MapManager map)
+    {
+        m_mapManager = map;
+        m_currentDirection = Vector2Int.zero;
+        m_currentCoordiante = map.SpawnPoint;
+        transform.position = map.GetSpawnWorldPos();
     }
 }

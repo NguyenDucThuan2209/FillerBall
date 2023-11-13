@@ -9,7 +9,6 @@ public class IngameScreen : UIScreen
     [SerializeField] Image m_starImage;
     [SerializeField] Image[] m_starImagesList;
 
-
     public void ResetStar()
     {
         foreach (var star in m_starImagesList)

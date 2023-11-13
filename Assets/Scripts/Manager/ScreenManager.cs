@@ -101,6 +101,12 @@ public class ScreenManager : MonoBehaviour
     }
     public void NextGame()
     {
+        IngameScreen ingame = (IngameScreen)m_uiScreens[(byte)Screen.Ingame];
+        ingame.ResetStar();
+
+        HideAllScreen();
+        ShowScreen(Screen.Ingame);
+        GameManager.Instance.NextLevel();
     }
     public void EndGame(int starAmount)
     {

@@ -55,8 +55,8 @@ namespace UnityEngine.Recorder.Examples
 
             m_Settings.ImageInputSettings = new GameViewInputSettings
             {
-                OutputWidth = 360,
-                OutputHeight = 800
+                OutputWidth = 1080,
+                OutputHeight = 1920
             };
 
             m_Settings.AudioInputSettings.PreserveAudio = m_RecordAudio;

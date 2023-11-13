@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] CharacterGameplay m_characterGameplay;
     [SerializeField] CameraController_Gameplay m_cameraGameplay;
 
+    private Map m_currentMap;
+    private int m_currentLevel;
     private int m_currentStar;
     private GameState m_lastGameState;
     private bool m_isSkinVietnam = true;
@@ -71,6 +73,8 @@ public class GameManager : MonoBehaviour
 
     private void ResetGameData()
     {
+        m_currentStar = 0;
+        Destroy(m_mapManager.gameObject);
     }
 
     public void StartGame(Map map, int level)
@@ -119,12 +123,13 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         ResetGameData();
+
+        
     }
     public void EndGame()
     {
         Debug.LogWarning("End Game");
 
-        ResetGameData();
         m_state = GameState.End;
         ScreenManager.Instance.EndGame(m_currentStar);
     }
@@ -135,6 +140,25 @@ public class GameManager : MonoBehaviour
     public void NextLevel()
     {
         ResetGameData();
+
+        m_currentLevel++;
+        m_lobby.SetActive(false);
+        m_gameplay.SetActive(true);
+        m_state = GameState.Gameplay;
+
+        if (m_mapManager != null)
+        {
+            Destroy(m_mapManager.gameObject);
+        }
+        foreach (var mapData in m_mapDatas)
+        {
+            if (mapData.Map == m_currentMap)
+            {
+                m_mapManager = Instantiate(mapData.MapLevels[m_currentLevel], m_gameplay.transform);
+                m_mapManager.Initialize(m_characterGameplay);
+                break;
+            }
+        }
     }
 
 

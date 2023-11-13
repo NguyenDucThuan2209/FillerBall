@@ -15,9 +15,17 @@ public class EndgameScreen : UIScreen
 
         m_result.text = starCount > 0 ? "VICTORY" : "LOSE";
 
-        for (int i = 0; i < starCount; i++)
+        for (int i = 0; i < m_starImages.Length; i++)
         {
-            StartCoroutine(Utilities.IE_LocalScale(m_starImages[i].rectTransform, Vector3.one * 3f, Vector3.one, 0.5f));
+            if (i < starCount)
+            {
+                m_starImages[i].gameObject.SetActive(true);
+                StartCoroutine(Utilities.IE_LocalScale(m_starImages[i].rectTransform, Vector3.one * 3f, Vector3.one, 0.5f));
+            }
+            else
+            {
+                m_starImages[i].gameObject.SetActive(false);
+            }
         }
     }
 
