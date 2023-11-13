@@ -98,7 +98,7 @@ public class MapManager : MonoBehaviour
             InitializeMap();
         }
 
-        GUIStyle style = new GUIStyle() { fontSize = 20, fontStyle = FontStyle.Normal, alignment = TextAnchor.MiddleCenter };
+        GUIStyle style = new GUIStyle() { fontSize = 15, fontStyle = FontStyle.Normal, alignment = TextAnchor.MiddleCenter };
         Gizmos.color = new Color(1, 0, 0, 0.25f);
         for (int i = 0; i < m_mapGridBoundarySize.x; i++)
         {
