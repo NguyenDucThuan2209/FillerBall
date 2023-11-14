@@ -19410,6 +19410,7 @@ MonoBehaviour:
   - {fileID: 1749402443}
   - {fileID: 873529094}
   m_result: {fileID: 1794502762}
+  m_continueButton: {fileID: 138359303}
 --- !u!1 &1781226091
 GameObject:
   m_ObjectHideFlags: 0
@@ -22057,6 +22058,9 @@ MonoBehaviour:
     - {fileID: 985192997312228298, guid: 431c91f82b150134fa30e2489a4ee6ac, type: 3}
     - {fileID: 6685278601054285379, guid: 56d135b13dd61cb419b09180e08a1de3, type: 3}
     - {fileID: 5544891831973147066, guid: 8f8ca2463c45f264aaddb04db331cfe5, type: 3}
+  m_gameplaySkinAnimators:
+  - {fileID: 9100000, guid: a95971e02ff4dc64cad9d772639cf0e9, type: 2}
+  - {fileID: 9100000, guid: 6f777a3d8bad47440b8b835ce9f1023a, type: 2}
   m_gameplay: {fileID: 1267015293}
   m_characterGameplay: {fileID: 155532686}
   m_cameraGameplay: {fileID: 1687383070}

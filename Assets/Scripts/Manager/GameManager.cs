@@ -37,21 +37,23 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject m_lobby;
     [SerializeField] CharacterLobby m_characterLobby;
     [SerializeField] CameraController_Lobby m_cameraLobby;
-
-    public RuntimeAnimatorController CurrentSkin => m_lobbySkinAnimators[m_isSkinVietnam ? 0 : 1];
+    public RuntimeAnimatorController CurrentLobbySkin => m_lobbySkinAnimators[m_isSkinVietnam ? 0 : 1];
     public RuntimeAnimatorController LobbySkin(bool isSkinVietNam) => m_lobbySkinAnimators[isSkinVietNam ? 0 : 1];
 
     [Header("GAMEPLAY")]
     [Header("Properties")]
     [SerializeField] MapData[] m_mapDatas;
+    [SerializeField] RuntimeAnimatorController[] m_gameplaySkinAnimators;
     [Header("References")]
     [SerializeField] GameObject m_gameplay;
     [SerializeField] CharacterGameplay m_characterGameplay;
     [SerializeField] CameraController_Gameplay m_cameraGameplay;
+    public RuntimeAnimatorController CurrentGameplaySkin => m_gameplaySkinAnimators[m_isSkinVietnam ? 0 : 1];
+    public RuntimeAnimatorController GameplaySkin(bool isSkinVietNam) => m_gameplaySkinAnimators[isSkinVietNam ? 0 : 1];
 
     private Map m_currentMap;
-    private int m_currentLevel;
     private int m_currentStar;
+    private int m_currentLevel;
     private GameState m_lastGameState;
     private bool m_isSkinVietnam = true;
 
@@ -74,19 +76,24 @@ public class GameManager : MonoBehaviour
     private void ResetGameData()
     {
         m_currentStar = 0;
-        Destroy(m_mapManager.gameObject);
-    }
-
-    public void StartGame(Map map, int level)
-    {
-        m_lobby.SetActive(false);
-        m_gameplay.SetActive(true);
-        m_state = GameState.Gameplay;
-
         if (m_mapManager != null)
         {
             Destroy(m_mapManager.gameObject);
         }
+    }
+
+    public void StartGame(Map map, int level)
+    {
+        ResetGameData();
+
+        m_currentMap = map;
+        m_currentLevel = level;
+        m_state = GameState.Gameplay;
+        m_characterGameplay.Animator.runtimeAnimatorController = CurrentGameplaySkin;
+
+        m_lobby.SetActive(false);
+        m_gameplay.SetActive(true);
+
         foreach (var mapData in m_mapDatas)
         {
             if (mapData.Map == map)
@@ -105,7 +112,7 @@ public class GameManager : MonoBehaviour
         m_gameplay.SetActive(false);
 
         LobbyManager.Instance.OnStartLobby();
-        m_characterLobby.Animator.runtimeAnimatorController = CurrentSkin;
+        m_characterLobby.Animator.runtimeAnimatorController = CurrentLobbySkin;
     }
     public void SetSkin(bool isSkinVietnam)
     {
@@ -124,7 +131,19 @@ public class GameManager : MonoBehaviour
     {
         ResetGameData();
 
-        
+        m_lobby.SetActive(false);
+        m_gameplay.SetActive(true);
+        m_state = GameState.Gameplay;
+
+        foreach (var mapData in m_mapDatas)
+        {
+            if (mapData.Map == m_currentMap)
+            {
+                m_mapManager = Instantiate(mapData.MapLevels[m_currentLevel], m_gameplay.transform);
+                m_mapManager.Initialize(m_characterGameplay);
+                break;
+            }
+        }
     }
     public void EndGame()
     {

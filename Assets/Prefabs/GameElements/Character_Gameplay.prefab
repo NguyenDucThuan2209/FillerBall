@@ -50,7 +50,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_speed: 0.075
   m_animator: {fileID: 47953718962029857}
+  m_collider: {fileID: 47953718962029870}
   m_currentCoordiante: {x: 0, y: 0}
+  m_isSliding: 0
+  m_isPause: 0
 --- !u!212 &47953718962029859
 SpriteRenderer:
   m_ObjectHideFlags: 0

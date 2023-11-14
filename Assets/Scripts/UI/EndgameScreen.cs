@@ -8,12 +8,17 @@ public class EndgameScreen : UIScreen
 {
     [SerializeField] Image[] m_starImages;
     [SerializeField] TextMeshProUGUI m_result;
+    [SerializeField] TextMeshProUGUI m_continueButton;
+
+    private bool m_isThisTimeWining = false;
 
     public void ShowScreen(int starCount)
     {
         base.ShowScreen();
 
+        m_isThisTimeWining = starCount > 0;
         m_result.text = starCount > 0 ? "VICTORY" : "LOSE";
+        m_continueButton.text = starCount > 0 ? "NEXT LEVEL" : "REPLAY";
 
         for (int i = 0; i < m_starImages.Length; i++)
         {
@@ -39,6 +44,13 @@ public class EndgameScreen : UIScreen
     {
         SoundManager.Instance?.PlaySound("Click");
 
-        ScreenManager.Instance.NextGame();
+        if (m_isThisTimeWining)
+        {
+            ScreenManager.Instance.NextGame();
+        }
+        else
+        {
+            ScreenManager.Instance.RestartGame();
+        }
     }
 }

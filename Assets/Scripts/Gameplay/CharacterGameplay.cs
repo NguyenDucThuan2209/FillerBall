@@ -6,18 +6,21 @@ public class CharacterGameplay : MonoBehaviour
 {
     [SerializeField] float m_speed = 1f;
     [SerializeField] Animator m_animator;
-    [SerializeField] Vector2Int m_currentCoordiante;
+    [SerializeField] Collider2D m_collider;
 
+    private Vector2Int m_currentCoordiante;
+    private Vector2Int m_currentDirection;
+
+    private Coroutine m_movementCoroutine;
     private MapManager m_mapManager;
 
-    private Vector2Int m_currentDirection;
-    private Coroutine m_movementCoroutine;
     private Vector2 m_startPosition;
     private Vector2 m_endPosition;
-    [SerializeField]
+    
     private bool m_isSliding;
-    [SerializeField]
     private bool m_isPause;
+
+    public Animator Animator => m_animator;
 
     public bool IsPause
     {
@@ -219,6 +222,8 @@ public class CharacterGameplay : MonoBehaviour
         {
             StopCoroutine(m_movementCoroutine);
         }
+
+        m_collider.enabled = false;
         m_animator.SetTrigger("Dead");
         m_animator.SetFloat("X_Direction", 0);
         m_animator.SetFloat("Y_Direction", 0);
@@ -229,6 +234,8 @@ public class CharacterGameplay : MonoBehaviour
     public void Initialize(MapManager map)
     {
         m_mapManager = map;
+        m_collider.enabled = true;
+        m_animator.SetTrigger("Respawn");
         m_currentDirection = Vector2Int.zero;
         m_currentCoordiante = map.SpawnPoint;
         transform.position = map.GetSpawnWorldPos();

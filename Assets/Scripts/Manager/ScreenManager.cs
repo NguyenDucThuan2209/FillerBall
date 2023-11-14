@@ -97,6 +97,7 @@ public class ScreenManager : MonoBehaviour
     public void RestartGame()
     {
         HideAllScreen();
+        ShowScreen(Screen.Ingame);
         GameManager.Instance.RestartGame();
     }
     public void NextGame()
