@@ -1225,7 +1225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_isShowCoordinates: 0
   m_mapFood: 4
-  m_spawnPoint: {x: 15, y: 0}
+  m_spawnPoint: {x: 14, y: 0}
   m_achivePointCoor: {x: 18, y: 12}
   m_tileSize: {x: 1, y: 1}
   m_tileOffset: {x: 0.5, y: 0.5, z: 0}

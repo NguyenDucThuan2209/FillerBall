@@ -1595,8 +1595,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_isShowCoordinates: 0
   m_mapFood: 2
-  m_spawnPoint: {x: 13, y: 0}
-  m_achivePointCoor: {x: 18, y: 17}
+  m_spawnPoint: {x: 2, y: 0}
+  m_achivePointCoor: {x: 18, y: 19}
   m_tileSize: {x: 1, y: 1}
   m_tileOffset: {x: 0.5, y: 0.5, z: 0}
   m_mapGridBoundarySize: {x: 20, y: 20}
