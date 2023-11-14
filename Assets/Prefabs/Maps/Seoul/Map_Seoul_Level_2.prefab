@@ -6309,7 +6309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00dfb59a28e412d40892cb8214bac994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_isShowCoordinates: 1
+  m_isShowCoordinates: 0
   m_mapFood: 3
   m_spawnPoint: {x: 13, y: 19}
   m_achivePointCoor: {x: 19, y: 8}
