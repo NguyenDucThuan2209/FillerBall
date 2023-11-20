@@ -48,12 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6e6aaa4c00b981499d9388b76dc073f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isUsingkeyboard: 0
   m_speed: 0.075
   m_animator: {fileID: 47953718962029857}
   m_collider: {fileID: 47953718962029870}
-  m_currentCoordiante: {x: 0, y: 0}
-  m_isSliding: 0
-  m_isPause: 0
 --- !u!212 &47953718962029859
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -151,7 +149,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.95}
   m_EdgeRadius: 0
 --- !u!50 &47953718962029869
 Rigidbody2D:

@@ -96,6 +96,9 @@ public class ScreenManager : MonoBehaviour
     }
     public void RestartGame()
     {
+        IngameScreen ingame = (IngameScreen)m_uiScreens[(byte)Screen.Ingame];
+        ingame.ResetStar();
+
         HideAllScreen();
         ShowScreen(Screen.Ingame);
         GameManager.Instance.RestartGame();
@@ -109,10 +112,10 @@ public class ScreenManager : MonoBehaviour
         ShowScreen(Screen.Ingame);
         GameManager.Instance.NextLevel();
     }
-    public void EndGame(int starAmount)
+    public void EndGame(int starAmount, bool isThisGameWin)
     {
         EndgameScreen endgame = (EndgameScreen)m_uiScreens[(byte)Screen.Endgame];
-        endgame.ShowScreen(starAmount);
+        endgame.ShowScreen(starAmount, isThisGameWin);
     }
 
     public void BackToHome()

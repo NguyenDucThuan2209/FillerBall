@@ -34,6 +34,8 @@ public class LobbyManager : MonoBehaviour
 
     public void OnStartLobby()
     {
+        SoundManager.Instance?.PlayMusic("Airport");
+
         m_airport.SetActive(true);
         for (int i = 0; i < m_lobbyMaps.Length; i++)
         {
@@ -62,10 +64,25 @@ public class LobbyManager : MonoBehaviour
         }
         else
         {
+            if (map == Map.Hue || map == Map.Hanoi)
+            {
+                SoundManager.Instance?.PlayMusic("VietnamMap");
+            }
+            else
+            {
+                SoundManager.Instance?.PlayMusic("KoreaMap");
+            }
+
             m_cameraController.TransitionToMap(map, () =>
             {
                 m_airport.SetActive(false);
                 m_lobbyMaps[(byte)map].SetActive(true);
+
+                var pointList = m_lobbyMaps[(byte)map].transform.GetComponentsInChildren<AchievePoint_Lobby>();
+                foreach (var point in pointList)
+                {
+                    point.SetAchievePointStatus(SystemManager.Data[(byte)map].Level + 1 < point.LevelIndex);
+                }
 
                 var mapPosition = m_lobbyMaps[(byte)map].transform.Find("SpawnPoint").position;
                 m_characterLobby.transform.position = mapPosition;

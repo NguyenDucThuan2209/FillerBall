@@ -62,20 +62,20 @@ public class CameraController_Lobby : MonoBehaviour
         while (t < planeDuration)
         {
             m_planeImage[index].rectTransform.anchoredPosition = Vector2.Lerp(Vector2.zero, new Vector2(0, 3500f), t / cloudDuration);
-            m_cloudImage.rectTransform.anchoredPosition = Vector2.Lerp(Vector2.zero, new Vector2(0, 3500f), t / cloudDuration);
+            //m_cloudImage.rectTransform.anchoredPosition = Vector2.Lerp(Vector2.zero, new Vector2(0, 3500f), t / cloudDuration);
             t += Time.deltaTime;
             yield return null;
         }
 
         onPlaneHideout?.Invoke();
 
-        //t = 0f;
-        //while (t < cloudDuration / 2f)
-        //{
-        //    m_cloudImage.rectTransform.anchoredPosition = Vector2.Lerp(Vector2.zero, new Vector2(0, 3500f), t / (cloudDuration / 2f));
-        //    t += Time.deltaTime;
-        //    yield return null;
-        //}
+        t = 0f;
+        while (t < cloudDuration / 2f)
+        {
+            m_cloudImage.rectTransform.anchoredPosition = Vector2.Lerp(Vector2.zero, new Vector2(0, 3500f), t / (cloudDuration / 2f));
+            t += Time.deltaTime;
+            yield return null;
+        }
     }
     private IEnumerator IE_ZoomIntoMap(float duration, System.Action callback = null)
     {
@@ -106,6 +106,7 @@ public class CameraController_Lobby : MonoBehaviour
     }
     public void TransitionToMap(Map map, System.Action onPlaneShowUp, float cloudDuration = 1f, float planeDuration = 1f)
     {
+        SoundManager.Instance?.PlaySound("AirplaneTransition", 3f);
         StartCoroutine(IE_TransitionToMap(map, onPlaneShowUp, null, cloudDuration, planeDuration));
     }
 }

@@ -12,16 +12,20 @@ public class EndgameScreen : UIScreen
 
     private bool m_isThisTimeWining = false;
 
-    public void ShowScreen(int starCount)
+    public void ShowScreen(int starCount, bool isThisGameWin)
     {
         base.ShowScreen();
 
-        m_isThisTimeWining = starCount > 0;
-        m_result.text = starCount > 0 ? "VICTORY" : "LOSE";
-        m_continueButton.text = starCount > 0 ? "NEXT LEVEL" : "REPLAY";
+        m_isThisTimeWining = isThisGameWin;
+        m_result.text = isThisGameWin ? "VICTORY" : "LOSE";
+        m_continueButton.text = isThisGameWin ? "NEXT LEVEL" : "REPLAY";
 
         for (int i = 0; i < m_starImages.Length; i++)
         {
+            m_starImages[i].color = isThisGameWin ?
+                                    new Color(1f, 1f, 1f, 1f) :
+                                    new Color(0.5f, 0.5f, 0.5f, 1f);
+
             if (i < starCount)
             {
                 m_starImages[i].gameObject.SetActive(true);

@@ -89,6 +89,7 @@ public class MapManager : MonoBehaviour
         InitializeCharacter();
         InitializeAchivePoint();
     }
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (!m_isShowCoordinates) return;
@@ -111,6 +112,7 @@ public class MapManager : MonoBehaviour
             }
         }
     }
+#endif
 
     private void InitializeMap()
     {
@@ -179,10 +181,10 @@ public class MapManager : MonoBehaviour
     {
         var worldPos = GetWorlPositionFromCoordiante(m_spawnPoint);
         m_character.Initialize(this);
-        m_character.IsPause = true;
+        //m_character.IsPause = true;
 
         CameraController_Gameplay.Instance.FadingCameraScreen(isFadeOut: true);
-        CameraController_Gameplay.Instance.AssignFollowingTarget(m_character.transform, 2f, () => m_character.IsPause = false);
+        CameraController_Gameplay.Instance.AssignFollowingTarget(m_character.transform, 1f);//, () => m_character.IsPause = false);
     }
     private void InitializeAchivePoint()
     {
@@ -196,8 +198,8 @@ public class MapManager : MonoBehaviour
 
         CameraController_Gameplay.Instance.AssignFollowingTarget(m_character.transform, 1f, () =>
         {
-            m_character.IsPause = false;
-            GameManager.Instance.ResumeGame();
+            //m_character.IsPause = false;
+            //GameManager.Instance.ResumeGame();
         });
     }
 
@@ -207,6 +209,7 @@ public class MapManager : MonoBehaviour
     }
     public void ConsumedFood(Vector3 worldPos)
     {
+        SoundManager.Instance?.PlaySound("StarCollect");
         var star = Instantiate(m_starPrefab, worldPos, Quaternion.identity);
 
         star.OnBeforeDestroyCallback += () => GameManager.Instance.CollectStar(worldPos);
@@ -215,9 +218,11 @@ public class MapManager : MonoBehaviour
 
         if (m_foodConsumed >= m_foodCoor.Length)
         {
-            m_character.IsPause = true;
+            SoundManager.Instance?.PlaySound("FullyCollectStar");
+
+            //m_character.IsPause = true;
             m_achievePoint.ActivePoint();
-            GameManager.Instance.PauseGame();
+            //GameManager.Instance.PauseGame();
             CameraController_Gameplay.Instance.FocusOnTarget(m_achievePoint.transform.position, 
                                                     CameraController_Gameplay.State.ZoomOut,
                                                     0.5f,

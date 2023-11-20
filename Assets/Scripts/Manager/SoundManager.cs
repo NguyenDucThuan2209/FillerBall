@@ -19,8 +19,10 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] AudioSource m_musicSource;
     [SerializeField] AudioSource m_soundSource;
+    [SerializeField] AudioSource m_slidingSource;
     [SerializeField] Audio[] m_musicAudio;
     [SerializeField] Audio[] m_soundAudio;
+    [SerializeField] Audio[] m_slidingAudio;
 
     public bool MusicState => !m_musicSource.mute;
     public bool SoundState => !m_soundSource.mute;
@@ -34,10 +36,6 @@ public class SoundManager : MonoBehaviour
         }
         m_instance = this;
     }
-    private void Start()
-    {
-        PlayMusic("BackgroundMusic");
-    }
 
     public void PlayMusic(string name)
     {
@@ -45,10 +43,17 @@ public class SoundManager : MonoBehaviour
         m_musicSource.clip = audio?.Clip;
         m_musicSource.Play();
     }
-    public void PlaySound(string name)
+    public void PlaySound(string name, float picth = 1f)
     {
         var audio = Array.Find(m_soundAudio, audio => audio.Name == name);
+        
+        m_soundSource.pitch = picth;
         m_soundSource.PlayOneShot(audio?.Clip);
+    }
+    public void PlaySide()
+    {
+        var audio = m_slidingAudio[UnityEngine.Random.Range(0, m_slidingAudio.Length)];
+        m_slidingSource.PlayOneShot(audio?.Clip);
     }
     public void SetMusicVolume(float value)
     {
@@ -65,11 +70,13 @@ public class SoundManager : MonoBehaviour
     public void SetSoundState(bool isMute)
     {
         m_soundSource.mute = isMute;
+        m_slidingSource.mute = isMute;
     }
 
     public void SetAllSoundState(bool isMute)
     {
         m_musicSource.mute = isMute;
         m_soundSource.mute = isMute;
+        m_slidingSource.mute = isMute;
     }
 }

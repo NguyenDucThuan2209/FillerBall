@@ -109,7 +109,7 @@ public class CameraController_Gameplay : MonoBehaviour
     {
         StartCoroutine(IE_FadingCamera(isFadeOut, duration, callback));
     }
-    public void AssignFollowingTarget(Transform target, float duration = 2f, System.Action callback = null)
+    public void AssignFollowingTarget(Transform target, float duration = 1f, System.Action callback = null)
     {
         m_followingTarget = target;
         FocusOnTarget(target.position, State.ZoomIn, duration, () =>

@@ -30,6 +30,8 @@ public class Fork : Obstacle
     {
         StartCoroutine(Utilities.IE_DelayForAction(0.5f, () =>
         {
+            SoundManager.Instance?.PlaySound("ForkPopup");
+
             m_animator.SetTrigger("Show");
             m_collider.isTrigger = false;
             m_isShow = true;

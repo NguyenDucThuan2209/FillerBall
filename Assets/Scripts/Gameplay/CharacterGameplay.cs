@@ -68,10 +68,80 @@ public class CharacterGameplay : MonoBehaviour
     private void Update()
     {
         if (GameManager.Instance.State != GameState.Gameplay) return;
+
+#if UNITY_EDITOR
+        KeyboardInputProcessing();
+#else
+        ScreenInputProcessing();
+#endif
+        
         if (m_isSliding || m_isPause) return;
+        if (m_currentDirection == Vector2Int.zero)
+        {
+            m_animator.SetFloat("X_Direction", m_currentDirection.x);
+            m_animator.SetFloat("Y_Direction", m_currentDirection.y);
+            return;
+        }
 
+        var targetCoor = m_mapManager.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
+        if (targetCoor != m_currentCoordiante)
+        {
+            SoundManager.Instance?.PlaySide();
+
+            m_isSliding = true;
+            var duration = Mathf.Max(m_speed * Mathf.Abs(m_currentCoordiante.x - targetCoor.x),
+                                     m_speed * Mathf.Abs(m_currentCoordiante.y - targetCoor.y));
+            var targetPos = m_mapManager.GetWorlPositionFromCoordiante(targetCoor);//(m_currentCoordiante, m_currentDirection);
+            m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
+                                                                             transform.position,
+                                                                             targetPos,
+                                                                             duration,
+                                                                             () =>
+                                                                             {
+                                                                                 m_currentCoordiante = targetCoor;
+                                                                                 m_isSliding = false;
+                                                                             }
+                                                                             ));
+        }
+
+        m_animator.SetFloat("X_Direction", m_currentDirection.x);
+        m_animator.SetFloat("Y_Direction", m_currentDirection.y);
         m_currentDirection = Vector2Int.zero;
+    }
 
+    private IEnumerator EndGame(float delay = 1f)
+    {
+        yield return new WaitForSeconds(delay);
+
+        GameManager.Instance.EndGame(false);
+
+        m_isSliding = false;
+        m_currentDirection = Vector2Int.zero;
+        m_currentCoordiante = m_mapManager.SpawnPoint;
+        transform.position = m_mapManager.GetSpawnWorldPos();
+
+        m_animator.SetFloat("X_Direction", m_currentDirection.x);
+        m_animator.SetFloat("Y_Direction", m_currentDirection.y);
+    }
+
+    private void OnObstacleHit()
+    {
+        if (m_movementCoroutine != null)
+        {
+            StopCoroutine(m_movementCoroutine);
+        }
+
+        m_collider.enabled = false;
+        m_animator.SetTrigger("Dead");
+        m_animator.SetFloat("X_Direction", 0);
+        m_animator.SetFloat("Y_Direction", 0);
+
+        StartCoroutine(EndGame());
+
+        SoundManager.Instance?.PlaySound("Lose");
+    }
+    private void ScreenInputProcessing()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             m_startPosition = Input.mousePosition;
@@ -91,53 +161,11 @@ public class CharacterGameplay : MonoBehaviour
                 {
                     // Move to the right square
                     m_currentDirection = new Vector2Int(1, 0);
-
-                    var targetCoor = m_mapManager.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
-                    if (targetCoor != m_currentCoordiante)
-                    {
-                        m_isSliding = true;
-                        var targetPos = m_mapManager.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
-                        m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
-                                                                                         transform.position,
-                                                                                         targetPos,
-                                                                                         m_speed * Mathf.Abs(m_currentCoordiante.x - targetCoor.x),
-                                                                                         () =>
-                                                                                         {
-                                                                                             m_currentCoordiante = targetCoor;
-                                                                                             m_isSliding = false;
-                                                                                         }
-                                                                                         ));
-                    }
-                    else
-                    {
-                        m_currentDirection = Vector2Int.zero;
-                    }
                 }
                 else
                 {
                     // Move to the left square
                     m_currentDirection = new Vector2Int(-1, 0);
-
-                    var targetCoor = m_mapManager.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
-                    if (targetCoor != m_currentCoordiante)
-                    {
-                        m_isSliding = true;
-                        var targetPos = m_mapManager.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
-                        m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
-                                                                                        transform.position,
-                                                                                        targetPos,
-                                                                                        m_speed * Mathf.Abs(m_currentCoordiante.x - targetCoor.x),
-                                                                                        () =>
-                                                                                        {
-                                                                                            m_currentCoordiante = targetCoor;
-                                                                                            m_isSliding = false;
-                                                                                        }
-                                                                                        ));
-                    }
-                    else
-                    {
-                        m_currentDirection = Vector2Int.zero;
-                    }
                 }
             }
             else
@@ -147,92 +175,46 @@ public class CharacterGameplay : MonoBehaviour
                 {
                     // Move to upper square
                     m_currentDirection = new Vector2Int(0, 1);
-
-                    var targetCoor = m_mapManager.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
-                    if (targetCoor != m_currentCoordiante)
-                    {
-                        m_isSliding = true;
-                        var targetPos = m_mapManager.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
-                        m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
-                                                                                         transform.position,
-                                                                                         targetPos,
-                                                                                         m_speed * Mathf.Abs(m_currentCoordiante.y - targetCoor.y),
-                                                                                         () =>
-                                                                                         {
-                                                                                             m_currentCoordiante = targetCoor;
-                                                                                             m_isSliding = false;
-                                                                                         }
-                                                                                         ));
-                    }
-                    else
-                    {
-                        m_currentDirection = Vector2Int.zero;
-                    }
                 }
                 else
                 {
                     // Move to lower square
                     m_currentDirection = new Vector2Int(0, -1);
-                    
-                    var targetCoor = m_mapManager.GetTargetCoordinate(m_currentCoordiante, m_currentDirection);
-                    if (targetCoor != m_currentCoordiante)
-                    {
-                        m_isSliding = true;
-                        var targetPos = m_mapManager.GetTargetWorldPos(m_currentCoordiante, m_currentDirection);
-                        m_movementCoroutine = StartCoroutine(Utilities.IE_WorldTranslate(transform,
-                                                                                         transform.position,
-                                                                                         targetPos,
-                                                                                         m_speed * Mathf.Abs(m_currentCoordiante.y - targetCoor.y),
-                                                                                         () =>
-                                                                                         {
-                                                                                             m_currentCoordiante = targetCoor;
-                                                                                             m_isSliding = false;
-                                                                                         }
-                                                                                         ));
-                    }
-                    else
-                    {
-                        m_currentDirection = Vector2Int.zero;
-                    }
                 }
             }
         }
-
-        m_animator.SetFloat("X_Direction", m_currentDirection.x);
-        m_animator.SetFloat("Y_Direction", m_currentDirection.y);
     }
-
-    private IEnumerator EndGame(float delay = 1f)
+    private void KeyboardInputProcessing()
     {
-        yield return new WaitForSeconds(delay);
-
-        GameManager.Instance.EndGame();
-
-        m_isSliding = false;
-        m_currentDirection = Vector2Int.zero;
-        m_currentCoordiante = m_mapManager.SpawnPoint;
-        transform.position = m_mapManager.GetSpawnWorldPos();
-
-        m_animator.SetFloat("X_Direction", m_currentDirection.x);
-        m_animator.SetFloat("Y_Direction", m_currentDirection.y);
-    }
-    private void OnObstacleHit()
-    {
-        if (m_movementCoroutine != null)
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            StopCoroutine(m_movementCoroutine);
+            // Move to upper square
+            m_currentDirection = new Vector2Int(0, 1);
         }
-
-        m_collider.enabled = false;
-        m_animator.SetTrigger("Dead");
-        m_animator.SetFloat("X_Direction", 0);
-        m_animator.SetFloat("Y_Direction", 0);
-
-        StartCoroutine(EndGame());
+        else
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            // Move to lower square
+            m_currentDirection = new Vector2Int(0, -1);
+        }
+        else
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            // Move to the left square
+            m_currentDirection = new Vector2Int(-1, 0);
+        }
+        else
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            // Move to the right square
+            m_currentDirection = new Vector2Int(1, 0);
+        }
     }
 
     public void Initialize(MapManager map)
     {
+        Debug.LogWarning("Character Initialized");
+
         m_mapManager = map;
         m_collider.enabled = true;
         m_animator.SetTrigger("Respawn");

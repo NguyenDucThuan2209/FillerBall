@@ -21,6 +21,6 @@ public class AchievePoint_Gameplay : MonoBehaviour
     }
     public void AchievedPoint()
     {
-        GameManager.Instance.EndGame();
+        GameManager.Instance.EndGame(true);
     }
 }

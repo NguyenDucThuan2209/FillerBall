@@ -16,9 +16,11 @@ internal struct MapData
 {
     [SerializeField] string m_name;
     [SerializeField] Map m_map;
+    [SerializeField] Sprite m_mapBackground;
     [SerializeField] MapManager[] m_mapLevels;
 
     public Map Map => m_map;
+    public Sprite MapBackground => m_mapBackground;
     public MapManager[] MapLevels => m_mapLevels;
 }
 
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] RuntimeAnimatorController[] m_gameplaySkinAnimators;
     [Header("References")]
     [SerializeField] GameObject m_gameplay;
+    [SerializeField] SpriteRenderer m_mapBackground;
     [SerializeField] CharacterGameplay m_characterGameplay;
     [SerializeField] CameraController_Gameplay m_cameraGameplay;
     public RuntimeAnimatorController CurrentGameplaySkin => m_gameplaySkinAnimators[m_isSkinVietnam ? 0 : 1];
@@ -99,6 +102,7 @@ public class GameManager : MonoBehaviour
             if (mapData.Map == map)
             {
                 m_mapManager = Instantiate(mapData.MapLevels[level], m_gameplay.transform);
+                m_mapBackground.sprite = mapData.MapBackground;
                 m_mapManager.Initialize(m_characterGameplay);
                 break;
             }
@@ -114,10 +118,24 @@ public class GameManager : MonoBehaviour
         LobbyManager.Instance.OnStartLobby();
         m_characterLobby.Animator.runtimeAnimatorController = CurrentLobbySkin;
     }
-    public void SetSkin(bool isSkinVietnam)
+    public void RestartGame()
     {
-        m_isSkinVietnam = isSkinVietnam;
+        Debug.LogWarning("Restart Game");
+
+        StartGame(m_currentMap, m_currentLevel);
     }
+    public void NextLevel()
+    {
+        Debug.LogWarning("Next Game");
+
+        if (m_currentLevel + 1 >= m_mapDatas[(byte)m_currentMap].MapLevels.Length)
+        {
+            m_currentLevel = -1;
+        }
+
+        StartGame(m_currentMap, m_currentLevel + 1);
+    }
+
     public void PauseGame()
     {
         m_lastGameState = m_state;
@@ -127,59 +145,23 @@ public class GameManager : MonoBehaviour
     {
         m_state = m_lastGameState;
     }
-    public void RestartGame()
-    {
-        ResetGameData();
-
-        m_lobby.SetActive(false);
-        m_gameplay.SetActive(true);
-        m_state = GameState.Gameplay;
-
-        foreach (var mapData in m_mapDatas)
-        {
-            if (mapData.Map == m_currentMap)
-            {
-                m_mapManager = Instantiate(mapData.MapLevels[m_currentLevel], m_gameplay.transform);
-                m_mapManager.Initialize(m_characterGameplay);
-                break;
-            }
-        }
-    }
-    public void EndGame()
+    public void EndGame(bool isThisGameWin)
     {
         Debug.LogWarning("End Game");
+        if (isThisGameWin)
+        {
+            SoundManager.Instance?.PlaySound("Win");
+            SystemManager.SaveMapLevel(m_currentMap, m_currentLevel);
+        }
+
 
         m_state = GameState.End;
-        ScreenManager.Instance.EndGame(m_currentStar);
+        ScreenManager.Instance.EndGame(m_currentStar, isThisGameWin);
     }
     public void ExitGame()
     {
         Debug.LogWarning("Exit Game");
     }
-    public void NextLevel()
-    {
-        ResetGameData();
-
-        m_currentLevel++;
-        m_lobby.SetActive(false);
-        m_gameplay.SetActive(true);
-        m_state = GameState.Gameplay;
-
-        if (m_mapManager != null)
-        {
-            Destroy(m_mapManager.gameObject);
-        }
-        foreach (var mapData in m_mapDatas)
-        {
-            if (mapData.Map == m_currentMap)
-            {
-                m_mapManager = Instantiate(mapData.MapLevels[m_currentLevel], m_gameplay.transform);
-                m_mapManager.Initialize(m_characterGameplay);
-                break;
-            }
-        }
-    }
-
 
     public void CollectStar(Vector3 worldPos)
     {
@@ -188,6 +170,11 @@ public class GameManager : MonoBehaviour
         var screenPoint = m_cameraGameplay.Camera.WorldToScreenPoint(worldPos);
         ScreenManager.Instance.CollectStar(screenPoint);
     }
+    public void SetSkin(bool isSkinVietnam)
+    {
+        m_isSkinVietnam = isSkinVietnam;
+    }
+
     public Vector2 GetJoystickInput()
     {
         return ScreenManager.Instance.GetUIJoystickInput();

@@ -29,6 +29,8 @@ public class LobbyScreen : UIScreen
     }
     public void OnEnterButtonPressed()
     {
+        SoundManager.Instance?.PlaySound("Click");
+
         ScreenManager.Instance.SelectLobbyInfo(m_currentMap, m_currentLevel);
     }
     public void OnPauseButtonPressed()
