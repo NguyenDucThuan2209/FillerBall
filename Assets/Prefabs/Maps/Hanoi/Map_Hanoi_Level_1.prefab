@@ -4614,7 +4614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isShowCoordinates: 0
-  m_mapFood: 0
+  m_mapFood: 1
   m_spawnPoint: {x: 17, y: 0}
   m_achivePointCoor: {x: 18, y: 11}
   m_tileSize: {x: 1, y: 1}
